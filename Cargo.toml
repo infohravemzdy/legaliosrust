@@ -18,3 +18,4 @@ include = [
 [dependencies]
 rust_decimal = "1.16"
 rust_decimal_macros = "1.16"
+chrono = "0.4"

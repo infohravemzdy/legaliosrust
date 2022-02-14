@@ -1,6 +1,6 @@
 use crate::factories::bundle_builder::{BundleBuilder, IBundleBuilder};
 use crate::service::period::IPeriod;
-use crate::factories::bundle_props::{BundleProps};
+use crate::service::bundle_props::{BundleProps};
 use crate::service::history_result_errors::HistoryResultError;
 
 pub trait IServiceLegalios {

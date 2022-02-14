@@ -5,11 +5,11 @@ mod service_tests {
     #[macro_use(crate::test_examples_int_taxing)]
     crate::report_test_examples_int_taxing!(
         test_examples_report,
-        taxing_12,
-        "04_Taxing_12_MinAmountOfTaxBonus",
+        taxing_13,
+        "04_Taxing_13_MinAmountOfTaxBonus",
         |x: &dyn IPropsTaxing| { x.min_amount_of_tax_bonus() },
-        2011,
-        2023
+        2010,
+        2022
     );
 
     #[macro_use(crate::test_examples_int_taxing)]

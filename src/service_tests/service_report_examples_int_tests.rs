@@ -9,7 +9,7 @@ mod service_examples_tests {
                 use crate::service::period;
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
-                use crate::factories::bundle_props::{IBundleProps};
+                use crate::service::bundle_props::{IBundleProps};
                 use crate::props::props_salary::{IPropsSalary};
 
                 use crate::service_tests::service_report_examples_tests::service_examples_tests::{close_report_file, create_report_file, write_report_head, write_report_year_ends, write_report_year_head, write_report_year_int_value};
@@ -71,7 +71,7 @@ mod service_examples_tests {
                 use crate::service::period;
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
-                use crate::factories::bundle_props::{IBundleProps};
+                use crate::service::bundle_props::{IBundleProps};
                 use crate::props::props_health::{IPropsHealth};
 
                 use crate::service_tests::service_report_examples_tests::service_examples_tests::{close_report_file, create_report_file, write_report_head, write_report_year_ends, write_report_year_head, write_report_year_int_value};
@@ -133,7 +133,7 @@ mod service_examples_tests {
                 use crate::service::period;
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
-                use crate::factories::bundle_props::{IBundleProps};
+                use crate::service::bundle_props::{IBundleProps};
                 use crate::props::props_social::{IPropsSocial};
 
                 use crate::service_tests::service_report_examples_tests::service_examples_tests::{close_report_file, create_report_file, write_report_head, write_report_year_ends, write_report_year_head, write_report_year_int_value};
@@ -195,7 +195,7 @@ mod service_examples_tests {
                 use crate::service::period;
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
-                use crate::factories::bundle_props::{IBundleProps};
+                use crate::service::bundle_props::{IBundleProps};
                 use crate::props::props_taxing::{IPropsTaxing};
 
                 use crate::service_tests::service_report_examples_tests::service_examples_tests::{close_report_file, create_report_file, write_report_head, write_report_year_ends, write_report_year_head, write_report_year_int_value};

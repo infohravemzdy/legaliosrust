@@ -8,8 +8,8 @@ mod service_tests {
         social_01,
         "03_Social_01_MaxAnnualsBasis",
         |x: &dyn IPropsSocial| { x.max_annuals_basis() },
-        2011,
-        2023
+        2010,
+        2022
     );
 
     #[macro_use(crate::test_examples_int_social)]

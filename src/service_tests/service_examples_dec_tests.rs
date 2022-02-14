@@ -11,7 +11,7 @@ mod service_examples_tests {
                 use crate::service::period;
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
-                use crate::factories::bundle_props::{IBundleProps};
+                use crate::service::bundle_props::{IBundleProps};
                 use crate::props::props_salary::{IPropsSalary};
 
                 $(
@@ -66,7 +66,7 @@ mod service_examples_tests {
                 use crate::service::period;
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
-                use crate::factories::bundle_props::{IBundleProps};
+                use crate::service::bundle_props::{IBundleProps};
                 use crate::props::props_health::{IPropsHealth};
 
                 $(
@@ -121,7 +121,7 @@ mod service_examples_tests {
                 use crate::service::period;
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
-                use crate::factories::bundle_props::{IBundleProps};
+                use crate::service::bundle_props::{IBundleProps};
                 use crate::props::props_social::{IPropsSocial};
 
                 $(
@@ -176,7 +176,7 @@ mod service_examples_tests {
                 use crate::service::period;
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
-                use crate::factories::bundle_props::{IBundleProps};
+                use crate::service::bundle_props::{IBundleProps};
                 use crate::props::props_taxing::{IPropsTaxing};
 
                 $(

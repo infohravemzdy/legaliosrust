@@ -8,8 +8,8 @@ mod service_tests {
         health_02,
         "01_Health_02_MaxAnnualsBasis",
         |x: &dyn IPropsHealth| { x.max_annuals_basis() },
-        2011,
-        2023
+        2010,
+        2022
     );
 
     #[macro_use(crate::test_examples_int_health)]

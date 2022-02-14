@@ -1,4 +1,4 @@
-use crate::factories::bundle_props::{BundleProps};
+use crate::service::bundle_props::{BundleProps};
 use crate::factories::provider_factory::{salary_factory, health_factory, social_factory, taxing_factory, IProviderFactory, ProviderSalaryFactory, ProviderHealthFactory, ProviderSocialFactory, ProviderTaxingFactory};
 use crate::props::props::IProps;
 use crate::props::props_health::{PropsHealth};
@@ -45,7 +45,7 @@ impl BundleBuilder {
         self.taxing_factory.get_props(_period)
     }
     fn is_null_or_empty(props: &dyn IProps) -> bool {
-        const MIN_VERSION: i16 = 2011;
+        const MIN_VERSION: i16 = 2010;
         let version = props.get_version().value;
         version == 0 || version < MIN_VERSION
      }

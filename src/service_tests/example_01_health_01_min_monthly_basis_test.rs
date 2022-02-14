@@ -8,8 +8,8 @@ mod service_tests {
         health_01,
         "01_Health_01_MinMonthlyBasis",
         |x: &dyn IPropsHealth| { x.min_monthly_basis() },
-        2011,
-        2023
+        2010,
+        2022
     );
 
     #[macro_use(crate::test_examples_int_health)]

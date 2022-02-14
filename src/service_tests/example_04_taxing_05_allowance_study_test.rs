@@ -8,8 +8,8 @@ mod service_tests {
         taxing_05,
         "04_Taxing_05_AllowanceStudy",
         |x: &dyn IPropsTaxing| { x.allowance_study() },
-        2011,
-        2023
+        2010,
+        2022
     );
 
     #[macro_use(crate::test_examples_int_taxing)]

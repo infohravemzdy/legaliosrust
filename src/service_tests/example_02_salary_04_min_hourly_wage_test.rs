@@ -8,8 +8,8 @@ mod service_tests {
         salary_04,
         "02_Salary_04_MinHourlyWage",
         |x: &dyn IPropsSalary| { x.min_hourly_wage() },
-        2011,
-        2023
+        2010,
+        2022
     );
 
     #[macro_use(crate::test_examples_int_salary)]

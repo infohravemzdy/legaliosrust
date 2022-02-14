@@ -8,8 +8,8 @@ mod service_tests {
         salary_01,
         "02_Salary_01_WorkingShiftWeek",
         |x: &dyn IPropsSalary| { x.working_shift_week() },
-        2011,
-        2023
+        2010,
+        2022
     );
 
     #[macro_use(crate::test_examples_int_salary)]

@@ -8,8 +8,8 @@ mod service_tests {
         social_06,
         "03_Social_06_FactorEmployeeReduce",
         |x: &dyn IPropsSocial| { x.factor_employee_reduce() },
-        2011,
-        2023
+        2010,
+        2022
     );
 
     #[macro_use(crate::test_examples_int_social)]

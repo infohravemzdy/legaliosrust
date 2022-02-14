@@ -14,13 +14,13 @@ pub trait IPropsTaxing : IProps {
     fn allowance_child3rd(&self) -> i32;
     fn factor_advances(&self) -> Decimal;
     fn factor_withhold(&self) -> Decimal;
-    fn factor_solitary(&self) -> Decimal;
+    fn factor_solidary(&self) -> Decimal;
     fn min_amount_of_tax_bonus(&self) -> i32;
     fn max_amount_of_tax_bonus(&self) -> i32;
     fn margin_income_of_tax_bonus(&self) -> i32;
     fn margin_income_of_rounding(&self) -> i32;
     fn margin_income_of_withhold(&self) -> i32;
-    fn margin_income_of_solitary(&self) -> i32;
+    fn margin_income_of_solidary(&self) -> i32;
     fn margin_income_of_wth_emp(&self) -> i32;
     fn margin_income_of_wth_agr(&self) -> i32;
 }
@@ -38,13 +38,13 @@ pub struct PropsTaxing{
     allowance_child3rd: i32,
     factor_advances: Decimal,
     factor_withhold: Decimal,
-    factor_solitary: Decimal,
+    factor_solidary: Decimal,
     min_amount_of_tax_bonus: i32,
     max_amount_of_tax_bonus: i32,
     margin_income_of_tax_bonus: i32,
     margin_income_of_rounding: i32,
     margin_income_of_withhold: i32,
-    margin_income_of_solitary: i32,
+    margin_income_of_solidary: i32,
     margin_income_of_wth_emp: i32,
     margin_income_of_wth_agr: i32
 }
@@ -62,13 +62,13 @@ impl PropsTaxing {
                       _allowance_child3rd: i32,
                       _factor_advances: Decimal,
                       _factor_withhold: Decimal,
-                      _factor_solitary: Decimal,
+                      _factor_solidary: Decimal,
                       _min_amount_of_tax_bonus: i32,
                       _max_amount_of_tax_bonus: i32,
                       _margin_income_of_tax_bonus: i32,
                       _margin_income_of_rounding: i32,
                       _margin_income_of_withhold: i32,
-                      _margin_income_of_solitary: i32,
+                      _margin_income_of_solidary: i32,
                       _margin_income_of_wth_emp: i32,
                       _margin_income_of_wth_agr: i32) -> PropsTaxing {
         PropsTaxing {
@@ -83,13 +83,13 @@ impl PropsTaxing {
             allowance_child3rd: _allowance_child3rd,
             factor_advances: _factor_advances,
             factor_withhold: _factor_withhold,
-            factor_solitary: _factor_solitary,
+            factor_solidary: _factor_solidary,
             min_amount_of_tax_bonus: _min_amount_of_tax_bonus,
             max_amount_of_tax_bonus: _max_amount_of_tax_bonus,
             margin_income_of_tax_bonus: _margin_income_of_tax_bonus,
             margin_income_of_rounding: _margin_income_of_rounding,
             margin_income_of_withhold: _margin_income_of_withhold,
-            margin_income_of_solitary: _margin_income_of_solitary,
+            margin_income_of_solidary: _margin_income_of_solidary,
             margin_income_of_wth_emp: _margin_income_of_wth_emp,
             margin_income_of_wth_agr: _margin_income_of_wth_agr
         }
@@ -107,13 +107,13 @@ impl PropsTaxing {
             allowance_child3rd: 0,
             factor_advances: dec!(0),
             factor_withhold: dec!(0),
-            factor_solitary: dec!(0),
+            factor_solidary: dec!(0),
             min_amount_of_tax_bonus: 0,
             max_amount_of_tax_bonus: 0,
             margin_income_of_tax_bonus: 0,
             margin_income_of_rounding: 0,
             margin_income_of_withhold: 0,
-            margin_income_of_solitary: 0,
+            margin_income_of_solidary: 0,
             margin_income_of_wth_emp: 0,
             margin_income_of_wth_agr: 0
         }
@@ -167,8 +167,8 @@ impl IPropsTaxing for PropsTaxing {
         self.factor_withhold
     }
 
-    fn factor_solitary(&self) -> Decimal {
-        self.factor_solitary
+    fn factor_solidary(&self) -> Decimal {
+        self.factor_solidary
     }
 
     fn min_amount_of_tax_bonus(&self) -> i32 {
@@ -191,8 +191,8 @@ impl IPropsTaxing for PropsTaxing {
         self.margin_income_of_withhold
     }
 
-    fn margin_income_of_solitary(&self) -> i32 {
-        self.margin_income_of_solitary
+    fn margin_income_of_solidary(&self) -> i32 {
+        self.margin_income_of_solidary
     }
 
     fn margin_income_of_wth_emp(&self) -> i32 {

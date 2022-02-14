@@ -8,8 +8,8 @@ mod service_tests {
         health_04,
         "01_Health_04_LimMonthlyDis50",
         |x: &dyn IPropsHealth| { x.lim_monthly_dis50() },
-        2011,
-        2023
+        2010,
+        2022
     );
 
     #[macro_use(crate::test_examples_int_health)]
