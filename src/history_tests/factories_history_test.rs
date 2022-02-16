@@ -1,4 +1,5 @@
 #[cfg(test)]
+
 mod factories_history_tests {
     use std::error::Error;
     use rust_decimal::Decimal;
@@ -11,29 +12,7 @@ mod factories_history_tests {
     use crate::service::period;
     use crate::service::period::{IPeriod, Period};
 
-    //#[cfg(test_history)]
-    macro_rules! test_factories_history {
-        ($suite:ident, $min_year: expr, $max_year: expr) => {
-            mod $suite {
-                use std::error::Error;
-                use rust_decimal::Decimal;
-                use rust_decimal_macros::dec;
-
-                $(
-                    #[test]
-                    fn $name() -> Result<(), Box<dyn Error>> {
-                        let decimal_target: Decimal = dec!(0);
-                        let decimal_result: Decimal = dec!(0);
-                        let decimal_rounds: Decimal = dec!(0);
-
-                        assert_eq!(decimal_result, decimal_rounds);
-                        Ok(())
-                    }
-                )*
-            }
-        }
-    }
-
+    #[cfg(test_report)]
     pub(crate) fn test_factories_history_test(min_year: i16, max_year: i16) -> Result<(), Box<dyn Error>> {
         let health_min_monthly_basis:i32            = 101;
         let health_max_annuals_basis:i32            = 102;
@@ -43,12 +22,12 @@ mod factories_history_tests {
         let health_factor_employee:i32              = 106;
         let health_margin_income_emp:i32            = 107;
         let health_margin_income_agr:i32            = 108;
-;
+
         let salary_working_shift_week:i32           = 201;
         let salary_working_shift_time:i32           = 202;
         let salary_min_monthly_wage:i32             = 203;
         let salary_min_hourly_wage:i32              = 204;
-;
+
         let social_max_annuals_basis:i32            = 301;
         let social_factor_employer:i32              = 302;
         let social_factor_employer_higher:i32       = 303;
@@ -57,7 +36,7 @@ mod factories_history_tests {
         let social_factor_employee_reduce:i32       = 306;
         let social_margin_income_emp:i32            = 307;
         let social_margin_income_agr:i32            = 308;
-;
+
         let taxing_allowance_payer:i32              = 401;
         let taxing_allowance_disab_1st:i32          = 402;
         let taxing_allowance_disab_2nd:i32          = 403;

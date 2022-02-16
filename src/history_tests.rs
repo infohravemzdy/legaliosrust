@@ -1,1 +1,2 @@
 mod factories_history_test;
+mod service_report_history_tests;

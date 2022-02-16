@@ -1,5 +1,6 @@
 #[cfg(test)]
-//#[cfg(test_report)]
+#[cfg(test_report)]
+
 mod factories_history_tests {
     use std::fs;
     use std::fs::{File, OpenOptions};

@@ -68,6 +68,10 @@ impl ProviderTaxing2016 {
         HistoryConstTaxing2016::FACTOR_SOLITARY
     }
 
+    fn factor_taxrate2(&self, _period: &dyn IPeriod) -> Decimal {
+        HistoryConstTaxing2016::FACTOR_TAXRATE2
+    }
+
     fn min_amount_of_tax_bonus(&self, _period: &dyn IPeriod) -> i32 {
         HistoryConstTaxing2016::MIN_AMOUNT_OF_TAXBONUS
     }
@@ -90,6 +94,10 @@ impl ProviderTaxing2016 {
 
     fn margin_income_of_solidary(&self, _period: &dyn IPeriod) -> i32 {
         HistoryConstTaxing2016::MARGIN_INCOME_OF_SOLITARY
+    }
+
+    fn margin_income_of_taxrate2(&self, _period: &dyn IPeriod) -> i32 {
+        HistoryConstTaxing2016::MARGIN_INCOME_OF_TAXRATE2
     }
 
     fn margin_income_of_wth_emp(&self, _period: &dyn IPeriod) -> i32 {
@@ -124,12 +132,14 @@ impl IPropsProvider<PropsTaxing> for ProviderTaxing2016 {
                          self.factor_advances(_period),
                          self.factor_withhold(_period),
                          self.factor_solidary(_period),
+                         self.factor_taxrate2(_period),
                          self.min_amount_of_tax_bonus(_period),
                          self.max_amount_of_tax_bonus(_period),
                          self.margin_income_of_tax_bonus(_period),
                          self.margin_income_of_rounding(_period),
                          self.margin_income_of_withhold(_period),
                          self.margin_income_of_solidary(_period),
+                         self.margin_income_of_taxrate2(_period),
                          self.margin_income_of_wth_emp(_period),
                          self.margin_income_of_wth_agr(_period))
     }

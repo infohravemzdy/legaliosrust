@@ -15,12 +15,14 @@ pub trait IPropsTaxing : IProps {
     fn factor_advances(&self) -> Decimal;
     fn factor_withhold(&self) -> Decimal;
     fn factor_solidary(&self) -> Decimal;
+    fn factor_taxrate2(&self) -> Decimal;
     fn min_amount_of_tax_bonus(&self) -> i32;
     fn max_amount_of_tax_bonus(&self) -> i32;
     fn margin_income_of_tax_bonus(&self) -> i32;
     fn margin_income_of_rounding(&self) -> i32;
     fn margin_income_of_withhold(&self) -> i32;
     fn margin_income_of_solidary(&self) -> i32;
+    fn margin_income_of_taxrate2(&self) -> i32;
     fn margin_income_of_wth_emp(&self) -> i32;
     fn margin_income_of_wth_agr(&self) -> i32;
 }
@@ -39,12 +41,14 @@ pub struct PropsTaxing{
     factor_advances: Decimal,
     factor_withhold: Decimal,
     factor_solidary: Decimal,
+    factor_taxrate2: Decimal,
     min_amount_of_tax_bonus: i32,
     max_amount_of_tax_bonus: i32,
     margin_income_of_tax_bonus: i32,
     margin_income_of_rounding: i32,
     margin_income_of_withhold: i32,
     margin_income_of_solidary: i32,
+    margin_income_of_taxrate2: i32,
     margin_income_of_wth_emp: i32,
     margin_income_of_wth_agr: i32
 }
@@ -63,12 +67,14 @@ impl PropsTaxing {
                       _factor_advances: Decimal,
                       _factor_withhold: Decimal,
                       _factor_solidary: Decimal,
+                      _factor_taxrate2: Decimal,
                       _min_amount_of_tax_bonus: i32,
                       _max_amount_of_tax_bonus: i32,
                       _margin_income_of_tax_bonus: i32,
                       _margin_income_of_rounding: i32,
                       _margin_income_of_withhold: i32,
                       _margin_income_of_solidary: i32,
+                      _margin_income_of_taxrate2: i32,
                       _margin_income_of_wth_emp: i32,
                       _margin_income_of_wth_agr: i32) -> PropsTaxing {
         PropsTaxing {
@@ -84,12 +90,14 @@ impl PropsTaxing {
             factor_advances: _factor_advances,
             factor_withhold: _factor_withhold,
             factor_solidary: _factor_solidary,
+            factor_taxrate2: _factor_taxrate2,
             min_amount_of_tax_bonus: _min_amount_of_tax_bonus,
             max_amount_of_tax_bonus: _max_amount_of_tax_bonus,
             margin_income_of_tax_bonus: _margin_income_of_tax_bonus,
             margin_income_of_rounding: _margin_income_of_rounding,
             margin_income_of_withhold: _margin_income_of_withhold,
             margin_income_of_solidary: _margin_income_of_solidary,
+            margin_income_of_taxrate2: _margin_income_of_taxrate2,
             margin_income_of_wth_emp: _margin_income_of_wth_emp,
             margin_income_of_wth_agr: _margin_income_of_wth_agr
         }
@@ -108,12 +116,14 @@ impl PropsTaxing {
             factor_advances: dec!(0),
             factor_withhold: dec!(0),
             factor_solidary: dec!(0),
+            factor_taxrate2: dec!(0),
             min_amount_of_tax_bonus: 0,
             max_amount_of_tax_bonus: 0,
             margin_income_of_tax_bonus: 0,
             margin_income_of_rounding: 0,
             margin_income_of_withhold: 0,
             margin_income_of_solidary: 0,
+            margin_income_of_taxrate2: 0,
             margin_income_of_wth_emp: 0,
             margin_income_of_wth_agr: 0
         }
@@ -171,6 +181,10 @@ impl IPropsTaxing for PropsTaxing {
         self.factor_solidary
     }
 
+    fn factor_taxrate2(&self) -> Decimal {
+        self.factor_taxrate2
+    }
+
     fn min_amount_of_tax_bonus(&self) -> i32 {
         self.min_amount_of_tax_bonus
     }
@@ -193,6 +207,10 @@ impl IPropsTaxing for PropsTaxing {
 
     fn margin_income_of_solidary(&self) -> i32 {
         self.margin_income_of_solidary
+    }
+
+    fn margin_income_of_taxrate2(&self) -> i32 {
+        self.margin_income_of_taxrate2
     }
 
     fn margin_income_of_wth_emp(&self) -> i32 {

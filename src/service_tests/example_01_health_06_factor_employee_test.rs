@@ -13,6 +13,20 @@ mod service_tests {
     );
 
     #[macro_use(crate::test_examples_dec_health)]
+    crate::test_examples_dec_health! (test_examples_2010, |x: &dyn IPropsHealth| {x.factor_employee()},
+        factor_employee_test_period_2010_01: 2010, 1, 2010, 1, dec!(3),
+        factor_employee_test_period_2010_02: 2010, 2, 2010, 2, dec!(3),
+        factor_employee_test_period_2010_03: 2010, 3, 2010, 3, dec!(3),
+        factor_employee_test_period_2010_04: 2010, 4, 2010, 4, dec!(3),
+        factor_employee_test_period_2010_05: 2010, 5, 2010, 5, dec!(3),
+        factor_employee_test_period_2010_06: 2010, 6, 2010, 6, dec!(3),
+        factor_employee_test_period_2010_07: 2010, 7, 2010, 7, dec!(3),
+        factor_employee_test_period_2010_08: 2010, 8, 2010, 8, dec!(3),
+        factor_employee_test_period_2010_09: 2010, 9, 2010, 9, dec!(3),
+        factor_employee_test_period_2010_10: 2010, 10, 2010, 10, dec!(3),
+        factor_employee_test_period_2010_11: 2010, 11, 2010, 11, dec!(3),
+        factor_employee_test_period_2010_12: 2010, 12, 2010, 12, dec!(3),
+    );
     crate::test_examples_dec_health! (test_examples_2011, |x: &dyn IPropsHealth| {x.factor_employee()},
         factor_employee_test_period_2011_01: 2011, 1, 2011, 1, dec!(3),
         factor_employee_test_period_2011_02: 2011, 2, 2011, 2, dec!(3),

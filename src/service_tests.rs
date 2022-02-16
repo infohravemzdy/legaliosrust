@@ -29,6 +29,7 @@ pub mod example_04_taxing_08_allowance_child3rd_test;
 pub mod example_04_taxing_09_factor_advances_test;
 pub mod example_04_taxing_10_factor_withhold_test;
 pub mod example_04_taxing_11_factor_solidary_test;
+pub mod example_04_taxing_12_factor_taxrate2_test;
 pub mod example_04_taxing_13_min_amount_of_tax_bonus_test;
 pub mod example_04_taxing_14_max_amount_of_tax_bonus_test;
 pub mod example_04_taxing_15_margin_income_of_tax_bonus_test;

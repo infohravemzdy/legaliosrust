@@ -1,8 +1,8 @@
 use rust_decimal::Decimal;
+use rust_decimal_macros::dec;
 use crate::providers::history_const_salary::HistoryConstSalary;
 use crate::providers::history_const_taxing::HistoryConstTaxing;
-use crate::providers::period_2010::history_const_taxing_2010::HistoryConstTaxing2010;
-use crate::providers::period_2011::history_const_salary_2011::HistoryConstSalary2011;
+use crate::providers::period_2010::history_const_salary_2010::HistoryConstSalary2010;
 
 // ALLOWANCE_PAYER                  Částka slevy na poplatníka
 //
@@ -46,33 +46,33 @@ use crate::providers::period_2011::history_const_salary_2011::HistoryConstSalary
 //
 // MARGIN_INCOME_OF_WHT_EMP         hranice příjmu pro srážkovou daň pro zaměstnace na dohodu (nepodepsal prohlášení)
 
-pub(crate) struct HistoryConstTaxing2011 {
+pub(crate) struct HistoryConstTaxing2010 {
 }
 
-impl HistoryConstTaxing for HistoryConstTaxing2011 {
-    const VERSION_CODE: i16 = 2011;
+impl HistoryConstTaxing for HistoryConstTaxing2010 {
+    const VERSION_CODE: i16 = 2010;
 
     const ALLOWANCE_PAYER: i32 = 1970;
-    const ALLOWANCE_DISAB_1ST: i32 = HistoryConstTaxing2010::ALLOWANCE_DISAB_1ST;
-    const ALLOWANCE_DISAB_2ND: i32 = HistoryConstTaxing2010::ALLOWANCE_DISAB_2ND;
-    const ALLOWANCE_DISAB_3RD: i32 = HistoryConstTaxing2010::ALLOWANCE_DISAB_3RD;
-    const ALLOWANCE_STUDY: i32 = HistoryConstTaxing2010::ALLOWANCE_STUDY;
-    const ALLOWANCE_CHILD_1ST: i32 = HistoryConstTaxing2010::ALLOWANCE_CHILD_1ST;
-    const ALLOWANCE_CHILD_2ND: i32 = HistoryConstTaxing2010::ALLOWANCE_CHILD_2ND;
-    const ALLOWANCE_CHILD_3RD: i32 = HistoryConstTaxing2010::ALLOWANCE_CHILD_3RD;
+    const ALLOWANCE_DISAB_1ST: i32 = 210;
+    const ALLOWANCE_DISAB_2ND: i32 = 420;
+    const ALLOWANCE_DISAB_3RD: i32 = 1345;
+    const ALLOWANCE_STUDY: i32 = 335;
+    const ALLOWANCE_CHILD_1ST: i32 = 967;
+    const ALLOWANCE_CHILD_2ND: i32 = 967;
+    const ALLOWANCE_CHILD_3RD: i32 = 967;
     const SETTLEMENT_CHILD_2ND: i32 = HistoryConstTaxing2010::ALLOWANCE_CHILD_2ND;
     const SETTLEMENT_CHILD_3RD: i32 = HistoryConstTaxing2010::ALLOWANCE_CHILD_3RD;
-    const FACTOR_ADVANCES: Decimal = HistoryConstTaxing2010::FACTOR_ADVANCES;
-    const FACTOR_WITHHOLD: Decimal = HistoryConstTaxing2010::FACTOR_WITHHOLD;
-    const FACTOR_SOLITARY: Decimal = HistoryConstTaxing2010::FACTOR_SOLITARY;
-    const FACTOR_TAXRATE2: Decimal = HistoryConstTaxing2010::FACTOR_TAXRATE2;
-    const MIN_AMOUNT_OF_TAXBONUS: i32 = HistoryConstTaxing2010::MIN_AMOUNT_OF_TAXBONUS;
-    const MAX_AMOUNT_OF_TAXBONUS: i32 = HistoryConstTaxing2010::MAX_AMOUNT_OF_TAXBONUS;
-    const MARGIN_INCOME_OF_TAXBONUS: i32 = (HistoryConstSalary2011::MIN_MONTHLY_WAGE / 2);
-    const MARGIN_INCOME_OF_ROUNDING: i32 = HistoryConstTaxing2010::MARGIN_INCOME_OF_ROUNDING;
-    const MARGIN_INCOME_OF_WITHHOLD: i32 = HistoryConstTaxing2010::MARGIN_INCOME_OF_WITHHOLD;
-    const MARGIN_INCOME_OF_SOLITARY: i32 = HistoryConstTaxing2010::MARGIN_INCOME_OF_SOLITARY;
-    const MARGIN_INCOME_OF_TAXRATE2: i32 = HistoryConstTaxing2010::MARGIN_INCOME_OF_TAXRATE2;
-    const MARGIN_INCOME_OF_WHT_EMP: i32 = HistoryConstTaxing2010::MARGIN_INCOME_OF_WHT_EMP;
-    const MARGIN_INCOME_OF_WHT_AGR: i32 = HistoryConstTaxing2010::MARGIN_INCOME_OF_WHT_AGR;
+    const FACTOR_ADVANCES: Decimal = dec!(15);
+    const FACTOR_WITHHOLD: Decimal = dec!(15);
+    const FACTOR_SOLITARY: Decimal = dec!(0);
+    const FACTOR_TAXRATE2: Decimal = dec!(0);
+    const MIN_AMOUNT_OF_TAXBONUS: i32 = 50;
+    const MAX_AMOUNT_OF_TAXBONUS: i32 = 4350;
+    const MARGIN_INCOME_OF_TAXBONUS: i32 = (HistoryConstSalary2010::MIN_MONTHLY_WAGE / 2);
+    const MARGIN_INCOME_OF_ROUNDING: i32 = 100;
+    const MARGIN_INCOME_OF_WITHHOLD: i32 = 5000;
+    const MARGIN_INCOME_OF_SOLITARY: i32 = 0;
+    const MARGIN_INCOME_OF_TAXRATE2: i32 = 0;
+    const MARGIN_INCOME_OF_WHT_EMP: i32 = 0;
+    const MARGIN_INCOME_OF_WHT_AGR: i32 = 0;
 }

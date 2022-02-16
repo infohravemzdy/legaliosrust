@@ -16,12 +16,14 @@ pub(crate) trait HistoryConstTaxing {
     const FACTOR_ADVANCES: Decimal;
     const FACTOR_WITHHOLD: Decimal;
     const FACTOR_SOLITARY: Decimal;
+    const FACTOR_TAXRATE2: Decimal;
     const MIN_AMOUNT_OF_TAXBONUS: i32;
     const MAX_AMOUNT_OF_TAXBONUS: i32;
     const MARGIN_INCOME_OF_TAXBONUS: i32;
     const MARGIN_INCOME_OF_ROUNDING: i32;
     const MARGIN_INCOME_OF_WITHHOLD: i32;
     const MARGIN_INCOME_OF_SOLITARY: i32;
+    const MARGIN_INCOME_OF_TAXRATE2: i32;
     const MARGIN_INCOME_OF_WHT_EMP: i32;
     const MARGIN_INCOME_OF_WHT_AGR: i32;
 }

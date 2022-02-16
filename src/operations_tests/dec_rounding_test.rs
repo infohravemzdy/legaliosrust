@@ -1,6 +1,8 @@
 #[cfg(test)]
 
 mod operations_tests {
+    use crate::service::operations_dec;
+
     macro_rules! test_dec_rounding {
         ($suite:ident, $test:expr, $($test_target: expr, $test_result: expr,)*) => {
             mod $suite {
@@ -25,7 +27,7 @@ mod operations_tests {
 
     #[macro_use(crate::test_dec_rounding)]
     crate::test_dec_rounding!(dec_round_up_should_return_rounded_decimal,
-            |t: decimal| {OperationsRound.dec_round_up(t)},
+            |t: decimal| {operations_dec::dec_round_up(t)},
             "5,5", "6",
             "2,5", "3",
             "1,6", "2",
