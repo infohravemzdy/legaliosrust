@@ -7,9 +7,10 @@ mod factories_history_tests {
     use std::io::Write;
     use rust_decimal::Decimal;
     use rust_decimal::prelude::ToPrimitive;
+    use rust_decimal::prelude::FromPrimitive;
     use rust_decimal_macros::dec;
 
-    fn create_history_file(file_name: &str) -> Option<File> {
+    pub fn create_history_file(file_name: &str) -> Option<File> {
         const PARENT_HISTORY_FOLDER_NAME: &str = "legalios";
         const HISTORY_FOLDER_NAME: &str = "TestHistory";
         let res_curr_path = std::env::current_dir();
@@ -42,7 +43,7 @@ mod factories_history_tests {
         Some(file_handle)
     }
 
-    fn export_history_start(opt_file_handle: &mut Option<File>, data: Vec<(i32, bool)>) {
+    pub fn export_history_start(opt_file_handle: &mut Option<File>, data: Vec<(i32, bool)>) {
         if opt_file_handle.is_none(){
             return;
         }
@@ -60,7 +61,7 @@ mod factories_history_tests {
         write!(file_handle, "\n").unwrap();
     }
 
-    fn export_history_term(opt_file_handle: &mut Option<File>, head: &Vec<(i32, bool)>, data: (i16, Vec<(i16, i16, string, string)>)) {
+    pub fn export_history_term(opt_file_handle: &mut Option<File>, head: &Vec<(i32, bool)>, data: (i16, Vec<(i16, i16, string, string)>)) {
         if opt_file_handle.is_none() {
             return;
         }
@@ -68,11 +69,11 @@ mod factories_history_tests {
         write!(file_handle, "{}", data.0).unwrap();
     }
 
-    fn props_int_value_to_string(value: i32) -> String {
+    pub fn props_int_value_to_string(value: i32) -> String {
         return format!("{}", value);
     }
-    fn props_dec_value_to_string(value: Decimal) -> String {
-        let dec_option = value*dec!(100);
+    pub fn props_dec_value_to_string(value: Decimal) -> String {
+        let dec_option = value*Decimal::from_i32(100).unwrap();
         let int_option = dec_option.to_i32();
         let int_value: i32 = match int_option {
             Some(value) => value,
@@ -80,7 +81,7 @@ mod factories_history_tests {
         };
         return format!("{}", int_value);
     }
-    fn write_history_year_int_value(opt_file_handle: &mut Option<File>, value: i32) {
+    pub fn write_history_year_int_value(opt_file_handle: &mut Option<File>, value: i32) {
         if opt_file_handle.is_none(){
             return;
         }
@@ -88,8 +89,8 @@ mod factories_history_tests {
         write!(file_handle, "\t{}", value).unwrap();
     }
 
-    fn write_history_year_dec_value(opt_file_handle: &mut Option<File>, value: Decimal) {
-        let dec_option = value*dec!(100);
+    pub fn write_history_year_dec_value(opt_file_handle: &mut Option<File>, value: Decimal) {
+        let dec_option = value*Decimal::from_i32(100).unwrap();
         let int_option = dec_option.to_i32();
         let int_value: i32 = match int_option {
             Some(value) => value,
@@ -102,7 +103,7 @@ mod factories_history_tests {
         write!(file_handle, "\t{}", int_value).unwrap();
     }
 
-    fn write_history_year_ends(opt_file_handle: &mut Option<File>) {
+    pub fn write_history_year_ends(opt_file_handle: &mut Option<File>) {
         if opt_file_handle.is_none(){
             return;
         }
@@ -110,7 +111,7 @@ mod factories_history_tests {
         write!(file_handle, "\n").unwrap();
     }
 
-    fn close_history_file(opt_file_handle: &mut Option<File>) {
+    pub fn close_history_file(opt_file_handle: &mut Option<File>) {
         if opt_file_handle.is_none(){
             return;
         }

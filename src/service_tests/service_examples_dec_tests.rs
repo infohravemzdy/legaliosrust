@@ -1,5 +1,5 @@
 #[cfg(test)]
-mod service_examples_tests {
+pub mod service_examples_tests {
     #[macro_export]
     macro_rules! test_examples_dec_salary {
         ($suite:ident, $test:expr, $($name:ident: $year: expr, $month: expr, $exp_year: expr, $exp_month: expr, $expected: expr,)*) => {
@@ -34,7 +34,7 @@ mod service_examples_tests {
                                 let bundle_into: &dyn IBundleProps = bundle;
                                 $test(&bundle_into.salary_props())
                             },
-                            None => dec!(0),
+                            None => Decimal::ZERO,
                         };
                         let result_year: i16 = match result_bundle {
                             Some(bundle) => bundle.get_period_year(),
@@ -67,7 +67,7 @@ mod service_examples_tests {
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
                 use crate::service::bundle_props::{IBundleProps};
-                use crate::props::props_health::{IPropsHealth};
+                use crate::props::props_health_base::{IPropsHealth};
 
                 $(
                     #[test]
@@ -89,7 +89,7 @@ mod service_examples_tests {
                                 let bundle_into:&dyn IBundleProps = bundle;
                                 $test(&bundle_into.health_props())
                             },
-                            None => dec!(0),
+                            None => Decimal::ZERO,
                         };
                         let result_year: i16 = match result_bundle {
                             Some(bundle) => bundle.get_period_year(),
@@ -122,7 +122,7 @@ mod service_examples_tests {
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
                 use crate::service::bundle_props::{IBundleProps};
-                use crate::props::props_social::{IPropsSocial};
+                use crate::props::props_social_base::{IPropsSocial};
 
                 $(
                     #[test]
@@ -144,7 +144,7 @@ mod service_examples_tests {
                                 let bundle_into:&dyn IBundleProps = bundle;
                                 $test(&bundle_into.social_props())
                             },
-                            None => dec!(0),
+                            None => Decimal::ZERO,
                         };
                         let result_year: i16 = match result_bundle {
                             Some(bundle) => bundle.get_period_year(),
@@ -177,7 +177,7 @@ mod service_examples_tests {
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
                 use crate::service::bundle_props::{IBundleProps};
-                use crate::props::props_taxing::{IPropsTaxing};
+                use crate::props::props_taxing_base::{IPropsTaxing};
 
                 $(
                     #[test]
@@ -199,7 +199,7 @@ mod service_examples_tests {
                                 let bundle_into:&dyn IBundleProps = bundle;
                                 $test(&bundle_into.taxing_props())
                             },
-                            None => dec!(0),
+                            None => Decimal::ZERO,
                         };
                         let result_year: i16 = match result_bundle {
                             Some(bundle) => bundle.get_period_year(),

@@ -1,18 +1,18 @@
 #[cfg(test)]
 
+#[cfg(test_report)]
 mod factories_history_tests {
     use std::error::Error;
     use rust_decimal::Decimal;
     use rust_decimal_macros::dec;
-    use crate::factories::provider_factory::{health_factory, IProviderFactory, ProviderHealthFactory, ProviderSalaryFactory, ProviderSocialFactory, ProviderTaxingFactory, salary_factory, social_factory, taxing_factory};
-    use crate::props::props_health::IPropsHealth;
+    use crate::factories::provider_factory::{health_factory, salary_factory, social_factory, taxing_factory, IProviderFactory, ProviderHealthFactory, ProviderSalaryFactory, ProviderSocialFactory, ProviderTaxingFactory};
+    use crate::props::props_health_base::IPropsHealth;
     use crate::props::props_salary::IPropsSalary;
-    use crate::props::props_social::IPropsSocial;
+    use crate::props::props_social_base::IPropsSocial;
     use crate::props::props_taxing::IPropsTaxing;
     use crate::service::period;
     use crate::service::period::{IPeriod, Period};
 
-    #[cfg(test_report)]
     pub(crate) fn test_factories_history_test(min_year: i16, max_year: i16) -> Result<(), Box<dyn Error>> {
         let health_min_monthly_basis:i32            = 101;
         let health_max_annuals_basis:i32            = 102;
@@ -69,7 +69,7 @@ mod factories_history_tests {
         write_report_head(&mut file);
 
         let mut header_data:Vec<(i32, bool)> = vec![];
-        for exp_year in min_year..max_year {
+        for exp_year in min_year..=max_year {
             let mut year_with_changes = false;
 
             let test_period = period::Period::get_with_year_month(exp_year, 1);
@@ -79,7 +79,7 @@ mod factories_history_tests {
             let test_social_prop = _sutSocial.get_props(testPeriod);
             let test_taxing_prop = _sutTaxing.get_props(testPeriod);
 
-            for test_month in 2i16..12i16 {
+            for test_month in 2i16..=12i16 {
                 let next_period = period::Period::get_with_year_month(test_year, test_month);
 
                 let test_salary_next = _sutSalary.get_props(next_period);
@@ -193,7 +193,7 @@ mod factories_history_tests {
             (taxing_margin_income_of_wht_emp, vect_taxing_margin_income_of_wht_emp),
             (taxing_margin_income_of_wht_agr, vect_taxing_margin_income_of_wht_agr),
         ];
-        for test_year in min_year..max_year {
+        for test_year in min_year..=max_year {
             let mut mes_health_min_monthly_basis = 0;
             let mut mes_health_max_annuals_basis = 0;
             let mut mes_health_lim_monthly_state = 0;
@@ -285,7 +285,7 @@ mod factories_history_tests {
             let jan_taxing_margin_income_of_wht_emp = props_int_value_to_string(test_taxing_prop.margin_income_of_wth_emp());
             let jan_taxing_margin_income_of_wht_agr = props_int_value_to_string(test_taxing_prop.margin_income_of_wth_agr());
 
-            for test_month in 2i16..12i16 {
+            for test_month in 2i16..=12i16 {
                 let next_period: &dyn IPeriod  = &period::Period::get_with_year_month(test_year, test_month);
                 
                 let test_salary_next = _sut_salary.get_props(next_period);

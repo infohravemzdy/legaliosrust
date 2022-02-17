@@ -25,7 +25,7 @@ impl HistoryConstHealth for HistoryConstHealth2010 {
     const VERSION_CODE: i16 = 2010;
 
     const MIN_MONTHLY_BASIS: i32 = HistoryConstSalary2010::MIN_MONTHLY_WAGE;
-    const MAX_ANNUALS_BASIS: i32 = 1781280;
+    const MAX_ANNUALS_BASIS: i32 = 1707048;
     const LIM_MONTHLY_STATE: i32 = 0;
     const LIM_MONTHLY_DIS50: i32 = 5355;
     const FACTOR_COMPOUND: Decimal = dec!(13.5);

@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use crate::props::props_health::{PropsHealth};
 use crate::props::props_salary::{PropsSalary};
-use crate::props::props_social::{PropsSocial};
+use crate::props::props_social::PropsSocial;
 use crate::props::props_taxing::{PropsTaxing};
 use crate::props::props::IProps;
 use crate::providers::period_2011::provider_health_2011::ProviderHealth2011;

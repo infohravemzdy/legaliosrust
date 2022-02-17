@@ -6,12 +6,12 @@ use crate::service::taxing_options::{TaxDeclBenfOption, TaxDeclDisabOption, TaxD
 use crate::service::version_id::VersionId;
 
 #[derive(Debug, Copy, Clone)]
-pub struct PropsTaxing {
+pub struct PropsTaxing2010 {
     props: PropsTaxingBase,
 }
 
 #[allow(dead_code)]
-impl PropsTaxing {
+impl PropsTaxing2010 {
     pub(crate) fn new(_version: VersionId,
                       _allowance_payer: i32,
                       _allowance_disab1st: i32,
@@ -33,8 +33,8 @@ impl PropsTaxing {
                       _margin_income_of_solidary: i32,
                       _margin_income_of_taxrate2: i32,
                       _margin_income_of_wth_emp: i32,
-                      _margin_income_of_wth_agr: i32) -> PropsTaxing {
-        PropsTaxing {
+                      _margin_income_of_wth_agr: i32) -> PropsTaxing2010 {
+        PropsTaxing2010 {
             props: PropsTaxingBase::new(_version,
                     _allowance_payer,
                     _allowance_disab1st,
@@ -59,20 +59,20 @@ impl PropsTaxing {
                     _margin_income_of_wth_agr),
         }
     }
-    pub(crate) fn empty() -> PropsTaxing {
-        PropsTaxing {
+    pub(crate) fn empty() -> PropsTaxing2010 {
+        PropsTaxing2010 {
             props: PropsTaxingBase::empty(),
         }
     }
 }
 
-impl IProps for PropsTaxing {
+impl IProps for PropsTaxing2010 {
     fn get_version(&self) -> VersionId {
         self.props.get_version()
     }
 }
 
-impl IPropsTaxing for PropsTaxing {
+impl IPropsTaxing for PropsTaxing2010 {
     fn allowance_payer(&self) -> i32 {
         self.props.allowance_payer()
     }
@@ -165,9 +165,35 @@ impl IPropsTaxing for PropsTaxing {
         return self.props.value_equals(Some(&other_taxing.props));
     }
 
-    fn has_withhold_income(&self, _term_opt: WorkTaxingTerms, _sgn_opt: TaxDeclSignOption, _none_opt: TaxNoneSignOption, _income_sum: i32) -> bool
+    fn has_withhold_income(&self, term_opt: WorkTaxingTerms, sgn_opt: TaxDeclSignOption, none_opt: TaxNoneSignOption, income_sum: i32) -> bool
     {
-        false
+        let mut withhold_income: bool = false;
+        if sgn_opt != TaxDeclSignOption::DeclTaxNoSigned {
+            return withhold_income;
+        }
+        if none_opt != TaxNoneSignOption::NosignTaxWithhold {
+            return withhold_income;
+        }
+        if term_opt == WorkTaxingTerms::TaxingTermAgreemTask {
+            if self.margin_income_of_wth_agr() == 0 || income_sum <= self.margin_income_of_wth_agr() {
+                if income_sum > 0 {
+                    withhold_income = true;
+                }
+            }
+        }
+        else if term_opt == WorkTaxingTerms::TaxingTermEmployments {
+            if self.margin_income_of_wth_emp() == 0 || income_sum <= self.margin_income_of_wth_emp() {
+                if income_sum > 0 {
+                    withhold_income = true;
+                }
+            }
+        }
+        else if term_opt == WorkTaxingTerms::TaxingTermStatutPart {
+            if income_sum > 0 {
+                withhold_income = true;
+            }
+        }
+        return withhold_income;
     }
 
     fn benefit_allowance_payer(&self, sign_opts: TaxDeclSignOption, benefit_opts: TaxDeclBenfOption) -> i32 {

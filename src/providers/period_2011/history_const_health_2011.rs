@@ -1,7 +1,7 @@
 use rust_decimal::Decimal;
-use rust_decimal_macros::dec;
 use crate::providers::history_const_health::HistoryConstHealth;
 use crate::providers::history_const_salary::HistoryConstSalary;
+use crate::providers::period_2010::history_const_health_2010::HistoryConstHealth2010;
 use crate::providers::period_2011::history_const_salary_2011::HistoryConstSalary2011;
 // MIN_MONTHLY_BASIS     Minimální základ zdravotního pojištění na jednoho pracovníka
 //
@@ -26,10 +26,10 @@ impl HistoryConstHealth for HistoryConstHealth2011 {
 
     const MIN_MONTHLY_BASIS: i32 = HistoryConstSalary2011::MIN_MONTHLY_WAGE;
     const MAX_ANNUALS_BASIS: i32 = 1781280;
-    const LIM_MONTHLY_STATE: i32 = 0;
-    const LIM_MONTHLY_DIS50: i32 = 5355;
-    const FACTOR_COMPOUND: Decimal = dec!(13.5);
-    const FACTOR_EMPLOYEE: Decimal = dec!(3);
-    const MARGIN_INCOME_EMP: i32 = 2000;
-    const MARGIN_INCOME_AGR: i32 = HistoryConstHealth2011::MARGIN_INCOME_EMP;
+    const LIM_MONTHLY_STATE: i32 = HistoryConstHealth2010::LIM_MONTHLY_STATE;
+    const LIM_MONTHLY_DIS50: i32 = HistoryConstHealth2010::LIM_MONTHLY_DIS50;
+    const FACTOR_COMPOUND: Decimal = HistoryConstHealth2010::FACTOR_COMPOUND;
+    const FACTOR_EMPLOYEE: Decimal = HistoryConstHealth2010::FACTOR_EMPLOYEE;
+    const MARGIN_INCOME_EMP: i32 = HistoryConstHealth2010::MARGIN_INCOME_EMP;
+    const MARGIN_INCOME_AGR: i32 = HistoryConstHealth2010::MARGIN_INCOME_AGR;
 }

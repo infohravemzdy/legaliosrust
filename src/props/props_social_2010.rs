@@ -6,12 +6,12 @@ use crate::service::contract_terms::WorkSocialTerms;
 use crate::service::version_id::VersionId;
 
 #[derive(Debug, Copy, Clone)]
-pub struct PropsSocial {
+pub struct PropsSocial2010 {
     props: PropsSocialBase,
 }
 
 #[allow(dead_code)]
-impl PropsSocial {
+impl PropsSocial2010 {
     pub(crate) fn new(_version: VersionId,
                       _max_annuals_basis: i32,
                       _factor_employer: Decimal,
@@ -20,8 +20,8 @@ impl PropsSocial {
                       _factor_employee_garant: Decimal,
                       _factor_employee_reduce: Decimal,
                       _margin_income_emp: i32,
-                      _margin_income_agr: i32) -> PropsSocial {
-        PropsSocial {
+                      _margin_income_agr: i32) -> PropsSocial2010 {
+        PropsSocial2010 {
             props: PropsSocialBase::new(_version,
                     _max_annuals_basis,
                     _factor_employer,
@@ -33,20 +33,20 @@ impl PropsSocial {
                     _margin_income_agr),
         }
     }
-    pub(crate) fn empty() -> PropsSocial {
-        PropsSocial {
+    pub(crate) fn empty() -> PropsSocial2010 {
+        PropsSocial2010 {
             props: PropsSocialBase::empty(),
         }
     }
 }
 
-impl IProps for PropsSocial {
+impl IProps for PropsSocial2010 {
     fn get_version(&self) -> VersionId {
         self.props.get_version()
     }
 }
 
-impl IPropsSocial for PropsSocial {
+impl IPropsSocial for PropsSocial2010 {
     fn max_annuals_basis(&self) -> i32 { self.props.max_annuals_basis() }
 
     fn factor_employer(&self) -> Decimal {

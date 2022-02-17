@@ -143,7 +143,7 @@ pub(crate) fn timesheet_week_schedule(_period: &dyn IPeriod, seconds_weekly: i32
 
     let sec_remainder = seconds_weekly - (seconds_daily * workdays_weekly as i32);
 
-    let week_schedule = (1..7).map(|x| week_day_seconds(x, workdays_weekly, seconds_daily, sec_remainder)).collect();
+    let week_schedule = (1..=7).map(|x| week_day_seconds(x, workdays_weekly, seconds_daily, sec_remainder)).collect();
 
     return week_schedule;
 }
@@ -163,7 +163,7 @@ pub(crate) fn timesheet_full_schedule(period: &dyn IPeriod, week_schedule: &Vec<
 
     let period_begin_cwd = week_day_of_month(period, 1);
 
-    let month_schedule = (1..period_days_count).map(|x| seconds_from_week_schedule(&week_schedule, x, period_begin_cwd)).collect();
+    let month_schedule = (1..=period_days_count).map(|x| seconds_from_week_schedule(&week_schedule, x, period_begin_cwd)).collect();
 
     return month_schedule;
 }

@@ -11,8 +11,8 @@ mod operations_tests {
                 $(
                     #[test]
                     fn $name() -> Result<(), Box<dyn Error>> {
-                        let decimal_target: Decimal = dec!(0);
-                        let decimal_result: Decimal = dec!(0);
+                        let decimal_target: Decimal = Decimal::ZERO;
+                        let decimal_result: Decimal = Decimal::ZERO;
                         let _sut = PropsSalary.empty();
                         let decimal_rounds: Decimal = $test(&_sut, decimal_target);
 

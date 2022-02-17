@@ -22,12 +22,12 @@ pub(crate) struct HistoryConstSocial2010 {
 impl HistoryConstSocial for HistoryConstSocial2010 {
     const VERSION_CODE: i16 = 2010;
 
-    const MAX_ANNUALS_BASIS: i32 = 1781280;
+    const MAX_ANNUALS_BASIS: i32 = 1707048;
     const FACTOR_EMPLOYER: Decimal = dec!(25);
-    const FACTOR_EMPLOYER_HIGHER: Decimal = dec!(26);
+    const FACTOR_EMPLOYER_HIGHER: Decimal = Decimal::ZERO;
     const FACTOR_EMPLOYEE: Decimal = dec!(6.5);
-    const FACTOR_EMPLOYEE_REDUCE: Decimal = dec!(0);
-    const FACTOR_EMPLOYEE_GARANT: Decimal = dec!(0);
+    const FACTOR_EMPLOYEE_REDUCE: Decimal = Decimal::ZERO;
+    const FACTOR_EMPLOYEE_GARANT: Decimal = Decimal::ZERO;
     const MARGIN_INCOME_EMP: i32 = 2000;
-    const MARGIN_INCOME_AGR: i32 = HistoryConstSocial2010::MARGIN_INCOME_EMP;
+    const MARGIN_INCOME_AGR: i32 = 0;
 }

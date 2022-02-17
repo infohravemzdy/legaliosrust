@@ -36,6 +36,7 @@ pub mod example_04_taxing_15_margin_income_of_tax_bonus_test;
 pub mod example_04_taxing_16_margin_income_of_rounding_test;
 pub mod example_04_taxing_17_margin_income_of_withhold_test;
 pub mod example_04_taxing_18_margin_income_of_solidary_test;
+pub mod example_04_taxing_19_margin_income_of_taxrate2_test;
 pub mod example_04_taxing_20_margin_income_of_wth_emp_test;
 pub mod example_04_taxing_21_margin_income_of_wth_agr_test;
 pub mod service_examples_int_tests;

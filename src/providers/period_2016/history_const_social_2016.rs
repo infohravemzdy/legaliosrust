@@ -1,5 +1,4 @@
 ﻿use rust_decimal::Decimal;
-use rust_decimal_macros::dec;
 use crate::providers::history_const_social::HistoryConstSocial;
 use crate::providers::period_2015::history_const_social_2015::HistoryConstSocial2015;
 //
@@ -32,8 +31,8 @@ impl HistoryConstSocial for HistoryConstSocial2016 {
     const FACTOR_EMPLOYER: Decimal = HistoryConstSocial2015::FACTOR_EMPLOYER;
     const FACTOR_EMPLOYER_HIGHER: Decimal = HistoryConstSocial2015::FACTOR_EMPLOYER_HIGHER;
     const FACTOR_EMPLOYEE: Decimal = HistoryConstSocial2015::FACTOR_EMPLOYEE;
-    const FACTOR_EMPLOYEE_REDUCE: Decimal =  dec!(0.0);
-    const FACTOR_EMPLOYEE_GARANT: Decimal =  dec!(0.0);
+    const FACTOR_EMPLOYEE_REDUCE: Decimal =  Decimal::ZERO;
+    const FACTOR_EMPLOYEE_GARANT: Decimal =  Decimal::ZERO;
     const MARGIN_INCOME_EMP: i32 = HistoryConstSocial2015::MARGIN_INCOME_EMP;
     const MARGIN_INCOME_AGR: i32 = HistoryConstSocial2015::MARGIN_INCOME_AGR;
 }

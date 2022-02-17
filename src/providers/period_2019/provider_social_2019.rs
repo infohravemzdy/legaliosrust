@@ -1,6 +1,6 @@
 ﻿use rust_decimal::Decimal;
 use crate::props::props::IProps;
-use crate::props::props_social::{PropsSocial};
+use crate::props::props_social::PropsSocial;
 use crate::providers::history_const_social::HistoryConstSocial;
 use crate::providers::period_2019::history_const_social_2019::{HistoryConstSocial2019, HistoryConstSocial2019var07};
 use crate::providers::props_provider::IPropsProvider;

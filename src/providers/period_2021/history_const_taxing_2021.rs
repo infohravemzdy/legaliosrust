@@ -1,5 +1,4 @@
 ﻿use rust_decimal::Decimal;
-use rust_decimal_macros::dec;
 use crate::providers::history_const_salary::HistoryConstSalary;
 use crate::providers::history_const_taxing::HistoryConstTaxing;
 use crate::providers::period_2020::history_const_taxing_2020::HistoryConstTaxing2020;
@@ -65,7 +64,7 @@ impl HistoryConstTaxing for HistoryConstTaxing2021 {
     const SETTLEMENT_CHILD_3RD: i32 = 2320;
     const FACTOR_ADVANCES: Decimal = HistoryConstTaxing2020::FACTOR_ADVANCES;
     const FACTOR_WITHHOLD: Decimal = HistoryConstTaxing2020::FACTOR_WITHHOLD;
-    const FACTOR_SOLITARY: Decimal = dec!(0.0);
+    const FACTOR_SOLITARY: Decimal = Decimal::ZERO;
     const FACTOR_TAXRATE2: Decimal = HistoryConstTaxing2020::FACTOR_TAXRATE2;
     const MIN_AMOUNT_OF_TAXBONUS: i32 = HistoryConstTaxing2020::MIN_AMOUNT_OF_TAXBONUS;
     const MAX_AMOUNT_OF_TAXBONUS: i32 = HistoryConstTaxing2020::MAX_AMOUNT_OF_TAXBONUS;

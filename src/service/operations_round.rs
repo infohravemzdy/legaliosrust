@@ -1,7 +1,6 @@
 use std::ops::{Add, Neg};
 use rust_decimal::Decimal;
 use rust_decimal::prelude::{FromPrimitive, FromStr, ToPrimitive};
-use rust_decimal_macros::dec;
 use crate::service::operations_dec;
 
 
@@ -82,14 +81,14 @@ pub(crate) fn near_round_down100(value_dec: Decimal) -> i32 {
 
 #[allow(dead_code)]
 pub(crate) fn round_up50(value_dec: Decimal) -> i32 {
-    let divider = dec!(2);
+    let divider = Decimal::from_i32(2).unwrap();
     let divid_ret = operations_dec::divide(dec_round_up(operations_dec::multiply(value_dec, divider)), divider);
     return round_to_int(divid_ret);
 }
 
 #[allow(dead_code)]
 pub(crate) fn round_up25(value_dec: Decimal) -> i32 {
-    let divider = dec!(4);
+    let divider = Decimal::from_i32(4).unwrap();
     let divid_ret = operations_dec::divide(dec_round_up(operations_dec::multiply(value_dec, divider)), divider);
     return round_to_int(divid_ret)
 }
@@ -159,54 +158,54 @@ pub(crate) fn dec_near_round_down100(value_dec: Decimal) -> Decimal {
 
 #[allow(dead_code)]
 pub(crate) fn dec_round_up50(value_dec: Decimal) -> Decimal {
-    let divider = dec!(2);
+    let divider = Decimal::from_i32(2).unwrap();
     return operations_dec::divide(dec_round_up(operations_dec::multiply(value_dec, divider)), divider);
 }
 
 #[allow(dead_code)]
 pub(crate) fn dec_round_up25(value_dec: Decimal) -> Decimal {
-    let divider = dec!(4);
+    let divider = Decimal::from_i32(4).unwrap();
     return operations_dec::divide(dec_round_up(operations_dec::multiply(value_dec, divider)), divider);
 }
 
 #[allow(dead_code)]
 pub(crate) fn dec_round_up01(value_dec: Decimal) -> Decimal {
-    let divider = dec!(100);
+    let divider = Decimal::from_i32(100).unwrap();
     return operations_dec::divide(dec_round_up(operations_dec::multiply(value_dec, divider)), divider);
 }
 
 #[allow(dead_code)]
 pub(crate) fn dec_round_down50(value_dec: Decimal) -> Decimal {
-    let divider = dec!(2);
+    let divider = Decimal::from_i32(2).unwrap();
     return operations_dec::divide(dec_round_down(operations_dec::multiply(value_dec, divider)), divider);
 }
 
 #[allow(dead_code)]
 pub(crate) fn dec_round_down25(value_dec: Decimal) -> Decimal {
-    let divider = dec!(4);
+    let divider = Decimal::from_i32(4).unwrap();
     return operations_dec::divide(dec_round_down(operations_dec::multiply(value_dec, divider)), divider);
 }
 
 #[allow(dead_code)]
 pub(crate) fn dec_round_down01(value_dec: Decimal) -> Decimal {
-    let divider = dec!(100);
+    let divider = Decimal::from_i32(100).unwrap();
     return operations_dec::divide(dec_round_down(operations_dec::multiply(value_dec, divider)), divider);
 }
 
 #[allow(dead_code)]
 pub(crate) fn dec_round_norm50(value_dec: Decimal) -> Decimal {
-    let divider = dec!(2);
+    let divider = Decimal::from_i32(2).unwrap();
     return operations_dec::divide(dec_round_norm(operations_dec::multiply(value_dec, divider)), divider);
 }
 
 #[allow(dead_code)]
 pub(crate) fn dec_round_norm25(value_dec: Decimal) -> Decimal {
-    let divider = dec!(4);
+    let divider = Decimal::from_i32(4).unwrap();
     return operations_dec::divide(dec_round_norm(operations_dec::multiply(value_dec, divider)), divider);
 }
 
 #[allow(dead_code)]
 pub(crate) fn dec_round_norm01(value_dec: Decimal) -> Decimal {
-    let divider = dec!(100);
+    let divider = Decimal::from_i32(100).unwrap();
     return operations_dec::divide(dec_round_norm(operations_dec::multiply(value_dec, divider)), divider);
 }

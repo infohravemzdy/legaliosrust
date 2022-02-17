@@ -6,12 +6,12 @@ use crate::service::contract_terms::WorkHealthTerms;
 use crate::service::version_id::VersionId;
 
 #[derive(Debug, Copy, Clone)]
-pub struct PropsHealth {
+pub struct PropsHealth2010 {
     props: PropsHealthBase,
 }
 
 #[allow(dead_code)]
-impl PropsHealth {
+impl PropsHealth2010 {
     pub(crate) fn new(_version: VersionId,
                       _min_monthly_basis: i32,
                       _max_annuals_basis: i32,
@@ -20,8 +20,8 @@ impl PropsHealth {
                       _factor_compound: Decimal,
                       _factor_employee: Decimal,
                       _margin_income_emp: i32,
-                      _margin_income_agr: i32) -> PropsHealth {
-        PropsHealth {
+                      _margin_income_agr: i32) -> PropsHealth2010 {
+        PropsHealth2010 {
             props: PropsHealthBase::new(_version,
                     _min_monthly_basis,
                     _max_annuals_basis,
@@ -33,18 +33,18 @@ impl PropsHealth {
                     _margin_income_agr),
         }
     }
-    pub(crate) fn empty() -> PropsHealth {
-        PropsHealth {
+    pub(crate) fn empty() -> PropsHealth2010 {
+        PropsHealth2010 {
             props: PropsHealthBase::empty(),
         }
     }
 }
 
-impl IProps for PropsHealth {
+impl IProps for PropsHealth2010 {
     fn get_version(&self) -> VersionId { self.props.get_version() }
 }
 
-impl IPropsHealth for PropsHealth {
+impl IPropsHealth for PropsHealth2010 {
     fn min_monthly_basis(&self) -> i32 { self.props.min_monthly_basis() }
 
     fn max_annuals_basis(&self) -> i32 {

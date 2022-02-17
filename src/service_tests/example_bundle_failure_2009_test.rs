@@ -1,6 +1,6 @@
 #[cfg(test)]
 
-mod service_tests {
+pub mod service_tests {
     macro_rules! test_examples_bundle {
         ($suite:ident, $($name:ident: $year: expr, $month: expr,)*) => {
             mod $suite {

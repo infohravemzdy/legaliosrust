@@ -52,7 +52,7 @@ pub(crate) struct HistoryConstTaxing2010 {
 impl HistoryConstTaxing for HistoryConstTaxing2010 {
     const VERSION_CODE: i16 = 2010;
 
-    const ALLOWANCE_PAYER: i32 = 1970;
+    const ALLOWANCE_PAYER: i32 = 2070;
     const ALLOWANCE_DISAB_1ST: i32 = 210;
     const ALLOWANCE_DISAB_2ND: i32 = 420;
     const ALLOWANCE_DISAB_3RD: i32 = 1345;
