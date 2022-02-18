@@ -1,5 +1,5 @@
 #[cfg(test)]
-#[cfg(test_report)]
+//#[cfg(test_report)]
 pub mod service_examples_tests {
     use std::fs;
     use std::fs::{File, OpenOptions};
@@ -7,11 +7,10 @@ pub mod service_examples_tests {
     use rust_decimal::Decimal;
     use rust_decimal::prelude::ToPrimitive;
     use rust_decimal::prelude::FromPrimitive;
-    use rust_decimal_macros::dec;
 
     pub fn create_report_file(file_name: &str) -> Option<File> {
         const PARENT_REPORT_FOLDER_NAME: &str = "legalios";
-        const REPORT_FOLDER_NAME: &str = "TestExamples";
+        const REPORT_FOLDER_NAME: &str = "test_values";
         let res_curr_path = std::env::current_dir();
         if res_curr_path.is_err(){
             return None;

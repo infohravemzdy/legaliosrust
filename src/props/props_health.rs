@@ -1,5 +1,4 @@
 use rust_decimal::Decimal;
-use crate::props::particy_result::IParticyResult;
 use crate::props::props::IProps;
 use crate::props::props_health_base::{IPropsHealth, PropsHealthBase};
 use crate::service::contract_terms::WorkHealthTerms;
@@ -38,6 +37,30 @@ impl PropsHealth {
             props: PropsHealthBase::empty(),
         }
     }
+    fn has_term_exemption_particy(_term: &WorkHealthTerms) -> bool {
+        return false;
+    }
+
+    fn has_income_based_employment_particy(term: &WorkHealthTerms) -> bool {
+        return match term {
+            WorkHealthTerms::HealthTermAgreemWork => true,
+            _ => false,
+        };
+    }
+
+    fn has_income_based_agreements_particy(_term: &WorkHealthTerms) -> bool {
+        return false;
+    }
+
+    fn has_income_cumulated_particy(term: &WorkHealthTerms) -> bool {
+        match term {
+            WorkHealthTerms::HealthTermEmployments => false,
+            WorkHealthTerms::HealthTermAgreemWork => false,
+            WorkHealthTerms::HealthTermAgreemTask => false,
+            WorkHealthTerms::HealthTermByContract => false,
+        }
+    }
+
 }
 
 impl IProps for PropsHealth {
@@ -73,36 +96,8 @@ impl IPropsHealth for PropsHealth {
 
     fn margin_income_agr(&self) -> i32 { self.props.margin_income_agr() }
 
-    fn value_equals(&self, other: Option<&Self>) -> bool {
-        if other.is_none() {
-            return false;
-        }
-        let other_health = other.unwrap();
-        return self.props.value_equals(Some(&other_health.props));
-    }
-
-    fn has_term_exemption_particy(_term: &WorkHealthTerms) -> bool {
-        return false;
-    }
-
-    fn has_income_based_employment_particy(term: &WorkHealthTerms) -> bool {
-        return match term {
-            WorkHealthTerms::HealthTermAgreemWork => true,
-            _ => false,
-        };
-    }
-
-    fn has_income_based_agreements_particy(_term: &WorkHealthTerms) -> bool {
-        return false;
-    }
-
-    fn has_income_cumulated_particy(term: &WorkHealthTerms) -> bool {
-        match term {
-            WorkHealthTerms::HealthTermEmployments => false,
-            WorkHealthTerms::HealthTermAgreemWork => false,
-            WorkHealthTerms::HealthTermAgreemTask => false,
-            WorkHealthTerms::HealthTermByContract => false,
-        }
+    fn value_equals(&self, other_health: &dyn IPropsHealth) -> bool {
+        return self.props.value_equals(other_health);
     }
 
     fn has_particy(&self, term: &WorkHealthTerms, income_term: i32, income_spec: i32) -> bool {
@@ -133,7 +128,7 @@ impl IPropsHealth for PropsHealth {
         return self.props.rounded_employer_paym(basis_result);
     }
 
-    fn annuals_basis_cut<T: IParticyResult>(&self, particy_list: Vec<T>, income_list: Vec<T>, annuity_basis: i32) -> (i32, i32, Vec<T>) {
-        return self.props.annuals_basis_cut::<T>(particy_list, income_list, annuity_basis);
-    }
+    // fn annuals_basis_cut(&self, income_list: Vec<impl IParticyResult>, annuity_basis: i32) -> (i32, i32) {
+    //     return self.props.annuals_basis_cut(income_list, annuity_basis);
+    // }
 }

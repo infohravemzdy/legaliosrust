@@ -157,12 +157,8 @@ impl IPropsTaxing for PropsTaxing2010 {
         self.props.margin_income_of_wth_agr()
     }
 
-    fn value_equals(&self, other: Option<&Self>) -> bool {
-        if other.is_none() {
-            return false;
-        }
-        let other_taxing = other.unwrap();
-        return self.props.value_equals(Some(&other_taxing.props));
+    fn value_equals(&self, other_taxing: &dyn IPropsTaxing) -> bool {
+        return self.props.value_equals(other_taxing);
     }
 
     fn has_withhold_income(&self, term_opt: WorkTaxingTerms, sgn_opt: TaxDeclSignOption, none_opt: TaxNoneSignOption, income_sum: i32) -> bool

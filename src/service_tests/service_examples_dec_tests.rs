@@ -6,8 +6,8 @@ pub mod service_examples_tests {
             mod $suite {
                 use std::error::Error;
 
+                use std::str::FromStr;
                 use rust_decimal::Decimal;
-                use rust_decimal_macros::dec;
                 use crate::service::period;
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
@@ -44,11 +44,12 @@ pub mod service_examples_tests {
                             Some(bundle) => bundle.get_period_month(),
                             None => 0,
                         };
+                        let expected_value = Decimal::from_str($expected).unwrap();
                         assert_eq!(result_error.is_none(), true);
                         assert_eq!(result_bundle.is_some(), true);
                         assert_eq!($exp_year, result_year);
                         assert_eq!($exp_month, result_month);
-                        assert_eq!($expected, result_value);
+                        assert_eq!(expected_value, result_value);
                         Ok(())
                     }
                 )*
@@ -61,8 +62,8 @@ pub mod service_examples_tests {
             mod $suite {
                 use std::error::Error;
 
+                use std::str::FromStr;
                 use rust_decimal::Decimal;
-                use rust_decimal_macros::dec;
                 use crate::service::period;
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
@@ -99,11 +100,12 @@ pub mod service_examples_tests {
                             Some(bundle) => bundle.get_period_month(),
                             None => 0,
                         };
+                        let expected_value = Decimal::from_str($expected).unwrap();
                         assert_eq!(result_error.is_none(), true);
                         assert_eq!(result_bundle.is_some(), true);
                         assert_eq!($exp_year, result_year);
                         assert_eq!($exp_month, result_month);
-                        assert_eq!($expected, result_value);
+                        assert_eq!(expected_value, result_value);
                         Ok(())
                     }
                 )*
@@ -116,8 +118,8 @@ pub mod service_examples_tests {
             mod $suite {
                 use std::error::Error;
 
+                use std::str::FromStr;
                 use rust_decimal::Decimal;
-                use rust_decimal_macros::dec;
                 use crate::service::period;
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
@@ -154,11 +156,12 @@ pub mod service_examples_tests {
                             Some(bundle) => bundle.get_period_month(),
                             None => 0,
                         };
+                        let expected_value = Decimal::from_str($expected).unwrap();
                         assert_eq!(result_error.is_none(), true);
                         assert_eq!(result_bundle.is_some(), true);
                         assert_eq!($exp_year, result_year);
                         assert_eq!($exp_month, result_month);
-                        assert_eq!($expected, result_value);
+                        assert_eq!(expected_value, result_value);
                         Ok(())
                     }
                 )*
@@ -171,8 +174,8 @@ pub mod service_examples_tests {
             mod $suite {
                 use std::error::Error;
 
+                use std::str::FromStr;
                 use rust_decimal::Decimal;
-                use rust_decimal_macros::dec;
                 use crate::service::period;
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
@@ -209,11 +212,12 @@ pub mod service_examples_tests {
                             Some(bundle) => bundle.get_period_month(),
                             None => 0,
                         };
+                        let expected_value = Decimal::from_str($expected).unwrap();
                         assert_eq!(result_error.is_none(), true);
                         assert_eq!(result_bundle.is_some(), true);
                         assert_eq!($exp_year, result_year);
                         assert_eq!($exp_month, result_month);
-                        assert_eq!($expected, result_value);
+                        assert_eq!(expected_value, result_value);
                         Ok(())
                     }
                 )*

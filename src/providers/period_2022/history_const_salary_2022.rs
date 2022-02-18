@@ -20,7 +20,7 @@ impl HistoryConstSalary for HistoryConstSalary2022 {
 
     const WORKING_SHIFT_WEEK: i32 = HistoryConstSalary2021::WORKING_SHIFT_WEEK;
     const WORKING_SHIFT_TIME: i32 = HistoryConstSalary2021::WORKING_SHIFT_TIME;
-    const MIN_MONTHLY_WAGE: i32   = HistoryConstSalary2021::MIN_MONTHLY_WAGE;
-    const MIN_HOURLY_WAGE: i32    = HistoryConstSalary2021::MIN_HOURLY_WAGE;
+    const MIN_MONTHLY_WAGE: i32   = 16200;
+    const MIN_HOURLY_WAGE: i32    = 9640;
 }
 

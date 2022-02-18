@@ -1,5 +1,5 @@
-use rust_decimal::Decimal;
 use rust_decimal_macros::dec;
+use rust_decimal::Decimal;
 use crate::providers::history_const_social::HistoryConstSocial;
 // MAX_ANNUALS_BASIS            Maximální roční vyměřovací základ na jednoho pracovníka (tzv.strop)
 //

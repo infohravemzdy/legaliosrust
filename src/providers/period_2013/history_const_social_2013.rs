@@ -1,5 +1,5 @@
-﻿use rust_decimal::Decimal;
-use rust_decimal_macros::dec;
+﻿use rust_decimal_macros::dec;
+use rust_decimal::Decimal;
 use crate::providers::history_const_social::HistoryConstSocial;
 use crate::providers::period_2012::history_const_social_2012::HistoryConstSocial2012;
 //

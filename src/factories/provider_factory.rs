@@ -4,6 +4,10 @@ use crate::props::props_salary::{PropsSalary};
 use crate::props::props_social::PropsSocial;
 use crate::props::props_taxing::{PropsTaxing};
 use crate::props::props::IProps;
+use crate::providers::period_2010::provider_health_2010::ProviderHealth2010;
+use crate::providers::period_2010::provider_salary_2010::ProviderSalary2010;
+use crate::providers::period_2010::provider_social_2010::ProviderSocial2010;
+use crate::providers::period_2010::provider_taxing_2010::ProviderTaxing2010;
 use crate::providers::period_2011::provider_health_2011::ProviderHealth2011;
 use crate::providers::period_2011::provider_salary_2011::ProviderSalary2011;
 use crate::providers::period_2011::provider_social_2011::ProviderSocial2011;
@@ -93,6 +97,7 @@ pub(crate) struct ProviderTaxingFactory {
 #[allow(dead_code)]
 pub(crate) fn salary_factory() -> ProviderSalaryFactory {
     let factories: Vec<BoxSalaryProvider> = vec![
+        Box::new(ProviderSalary2010::new()),
         Box::new(ProviderSalary2011::new()),
         Box::new(ProviderSalary2012::new()),
         Box::new(ProviderSalary2013::new()),
@@ -116,6 +121,7 @@ pub(crate) fn salary_factory() -> ProviderSalaryFactory {
 #[allow(dead_code)]
 pub(crate) fn health_factory() -> ProviderHealthFactory {
     let factories: Vec<BoxHealthProvider> = vec![
+        Box::new(ProviderHealth2010::new()),
         Box::new(ProviderHealth2011::new()),
         Box::new(ProviderHealth2012::new()),
         Box::new(ProviderHealth2013::new()),
@@ -139,6 +145,7 @@ pub(crate) fn health_factory() -> ProviderHealthFactory {
 #[allow(dead_code)]
 pub(crate) fn social_factory() -> ProviderSocialFactory {
     let factories: Vec<BoxSocialProvider> = vec![
+        Box::new(ProviderSocial2010::new()),
         Box::new(ProviderSocial2011::new()),
         Box::new(ProviderSocial2012::new()),
         Box::new(ProviderSocial2013::new()),
@@ -162,6 +169,7 @@ pub(crate) fn social_factory() -> ProviderSocialFactory {
 #[allow(dead_code)]
 pub(crate) fn taxing_factory() -> ProviderTaxingFactory {
     let factories: Vec<BoxTaxingProvider> = vec![
+        Box::new(ProviderTaxing2010::new()),
         Box::new(ProviderTaxing2011::new()),
         Box::new(ProviderTaxing2012::new()),
         Box::new(ProviderTaxing2013::new()),

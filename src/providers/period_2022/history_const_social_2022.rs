@@ -27,7 +27,7 @@ pub(crate) struct HistoryConstSocial2022 {
 impl HistoryConstSocial for HistoryConstSocial2022 {
     const VERSION_CODE: i16 = 2022;
 
-    const MAX_ANNUALS_BASIS: i32 = HistoryConstSocial2021::MAX_ANNUALS_BASIS;
+    const MAX_ANNUALS_BASIS: i32 = 1867728;
     const FACTOR_EMPLOYER: Decimal = HistoryConstSocial2021::FACTOR_EMPLOYER;
     const FACTOR_EMPLOYER_HIGHER: Decimal = HistoryConstSocial2021::FACTOR_EMPLOYER_HIGHER;
     const FACTOR_EMPLOYEE: Decimal = HistoryConstSocial2021::FACTOR_EMPLOYEE;

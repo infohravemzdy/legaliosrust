@@ -1,7 +1,7 @@
 #[cfg(test)]
 
 mod service_tests {
-    #[cfg(test_report)]
+    //#[cfg(test_report)]
     #[macro_use(crate::report_test_examples_int_salary)]
     crate::report_test_examples_int_salary!(
         test_examples_report,
@@ -182,17 +182,17 @@ mod service_tests {
         min_monthly_wage_test_period_2021_12: 2021, 12, 2021, 12, 15200,
     );
     crate::test_examples_int_salary! (test_examples_2022, |x: &dyn IPropsSalary| {x.min_monthly_wage()},
-        min_monthly_wage_test_period_2022_01: 2022, 1, 2022, 1, 15200,
-        min_monthly_wage_test_period_2022_02: 2022, 2, 2022, 2, 15200,
-        min_monthly_wage_test_period_2022_03: 2022, 3, 2022, 3, 15200,
-        min_monthly_wage_test_period_2022_04: 2022, 4, 2022, 4, 15200,
-        min_monthly_wage_test_period_2022_05: 2022, 5, 2022, 5, 15200,
-        min_monthly_wage_test_period_2022_06: 2022, 6, 2022, 6, 15200,
-        min_monthly_wage_test_period_2022_07: 2022, 7, 2022, 7, 15200,
-        min_monthly_wage_test_period_2022_08: 2022, 8, 2022, 8, 15200,
-        min_monthly_wage_test_period_2022_09: 2022, 9, 2022, 9, 15200,
-        min_monthly_wage_test_period_2022_10: 2022, 10, 2022, 10, 15200,
-        min_monthly_wage_test_period_2022_11: 2022, 11, 2022, 11, 15200,
-        min_monthly_wage_test_period_2022_12: 2022, 12, 2022, 12, 15200,
+        min_monthly_wage_test_period_2022_01: 2022, 1, 2022, 1, 16200,
+        min_monthly_wage_test_period_2022_02: 2022, 2, 2022, 2, 16200,
+        min_monthly_wage_test_period_2022_03: 2022, 3, 2022, 3, 16200,
+        min_monthly_wage_test_period_2022_04: 2022, 4, 2022, 4, 16200,
+        min_monthly_wage_test_period_2022_05: 2022, 5, 2022, 5, 16200,
+        min_monthly_wage_test_period_2022_06: 2022, 6, 2022, 6, 16200,
+        min_monthly_wage_test_period_2022_07: 2022, 7, 2022, 7, 16200,
+        min_monthly_wage_test_period_2022_08: 2022, 8, 2022, 8, 16200,
+        min_monthly_wage_test_period_2022_09: 2022, 9, 2022, 9, 16200,
+        min_monthly_wage_test_period_2022_10: 2022, 10, 2022, 10, 16200,
+        min_monthly_wage_test_period_2022_11: 2022, 11, 2022, 11, 16200,
+        min_monthly_wage_test_period_2022_12: 2022, 12, 2022, 12, 16200,
     );
 }

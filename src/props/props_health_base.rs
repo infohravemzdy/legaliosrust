@@ -17,18 +17,13 @@ pub trait IPropsHealth : IProps {
     fn margin_income_emp(&self) -> i32;
     fn margin_income_agr(&self) -> i32;
 
-    fn value_equals(&self, other: Option<&Self>) ->  bool;
-    fn has_term_exemption_particy(_term: &WorkHealthTerms) -> bool { false }
-    fn has_income_based_employment_particy(_term: &WorkHealthTerms) -> bool { false }
-    fn has_income_based_agreements_particy(_term: &WorkHealthTerms) -> bool { false }
-    fn has_income_cumulated_particy(_term: &WorkHealthTerms) -> bool { false }
+    fn value_equals(&self, other_health: &dyn IPropsHealth) ->  bool;
     fn has_particy(&self, term: &WorkHealthTerms, income_term: i32, income_spec: i32) ->  bool;
     fn rounded_compound_paym(&self, basis_result: i32) ->  i32;
     fn rounded_employee_paym(&self, basis_result: i32) ->  i32;
     fn rounded_augment_employee_paym(&self, basis_generals: i32, basis_augment: i32) ->  i32;
     fn rounded_augment_employer_paym(&self, basis_generals: i32, base_employee: i32, base_employer: i32) ->  i32;
     fn rounded_employer_paym(&self, basis_result: i32) ->  i32;
-    fn annuals_basis_cut<T: IParticyResult>(&self, particy_list: Vec<T>, income_list: Vec<T>, annuity_basis: i32) ->  (i32, i32, Vec<T>);
 }
 
 #[derive(Debug, Copy, Clone)]
@@ -80,11 +75,11 @@ impl PropsHealthBase {
             margin_income_agr: 0,
         }
     }
-    fn maxim_result_cut<T: IParticyResult>(particy_list: Vec<T>, income_list: Vec<T>, annuity_basis: i32, annualy_maxim: i32) -> (i32, i32, Vec<T>) {
+    fn maxim_result_cut(income_list: Vec<impl IParticyResult>, annuity_basis: i32, annualy_maxim: i32) -> (i32, i32) {
         let annuals_basis = max(0, annualy_maxim - annuity_basis);
-        let result_init: (i32, i32, Vec<T>) = (annualy_maxim, annuals_basis, particy_list);
+        let result_init= (annualy_maxim, annuals_basis);
 
-        let result_list: (i32, i32, Vec<T>) = income_list.iter().fold(result_init, |agr, x| {
+        let result_list = income_list.into_iter().fold(result_init, |agr, mut x| {
             let raw_annuals_basis: i32 = x.result_basis();
             let mut cut_annuals_basis: i32 = 0;
             let mut rem_annuals_basis: i32 = agr.1;
@@ -98,9 +93,8 @@ impl PropsHealthBase {
                 rem_annuals_basis = max(0, agr.1 - cut_annuals_basis);
             }
 
-            let mut result_item = *x;
-            result_item.set_result_value(max(0, cut_annuals_basis));
-            return (agr.0, rem_annuals_basis, vec![agr.2, vec![result_item]].concat());
+            x.set_result_value(max(0, cut_annuals_basis));
+            return (agr.0, rem_annuals_basis);
         });
         return result_list;
     }
@@ -111,6 +105,11 @@ impl PropsHealthBase {
     fn int_insurance_round_up(value_dec: Decimal) -> i32 {
         return operations_round::round_up(value_dec);
     }
+    fn has_term_exemption_particy(_term: &WorkHealthTerms) -> bool { false }
+    fn has_income_based_employment_particy(_term: &WorkHealthTerms) -> bool { false }
+    fn has_income_based_agreements_particy(_term: &WorkHealthTerms) -> bool { false }
+    fn has_income_cumulated_particy(_term: &WorkHealthTerms) -> bool { false }
+
     pub(crate) fn has_particy_with_adapters(&self, term: &WorkHealthTerms,
                                             income_term: i32, income_spec: i32,
                                             exemption_particy: fn (&WorkHealthTerms) -> bool,
@@ -186,12 +185,8 @@ impl IPropsHealth for PropsHealthBase {
         self.margin_income_agr
     }
 
-    fn value_equals(&self, other: Option<&Self>) -> bool {
-        if other.is_none() {
-            return false;
-        }
-        let other_health = other.unwrap();
-        return self.min_monthly_basis == other_health.min_monthly_basis() &&
+    fn value_equals(&self, other_health: &dyn IPropsHealth) -> bool {
+         return self.min_monthly_basis == other_health.min_monthly_basis() &&
             self.max_annuals_basis == other_health.max_annuals_basis() &&
             self.lim_monthly_state == other_health.lim_monthly_state() &&
             self.lim_monthly_dis50 == other_health.lim_monthly_dis50() &&
@@ -248,7 +243,7 @@ impl IPropsHealth for PropsHealthBase {
         return max(0, compound_payment - employee_payment);
     }
 
-    fn annuals_basis_cut<T: IParticyResult>(&self, particy_list: Vec<T>, income_list: Vec<T>, annuity_basis: i32) -> (i32, i32, Vec<T>) {
-        return Self::maxim_result_cut::<T>(particy_list, income_list, annuity_basis, self.max_annuals_basis);
-    }
+    // fn annuals_basis_cut(&self, income_list: Vec<impl IParticyResult>, annuity_basis: i32) -> (i32, i32) {
+    //     return Self::maxim_result_cut(income_list, annuity_basis, self.max_annuals_basis);
+    // }
 }

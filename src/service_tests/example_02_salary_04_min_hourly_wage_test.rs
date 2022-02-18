@@ -1,7 +1,7 @@
 #[cfg(test)]
 
 mod service_tests {
-    #[cfg(test_report)]
+    //#[cfg(test_report)]
     #[macro_use(crate::report_test_examples_int_salary)]
     crate::report_test_examples_int_salary!(
         test_examples_report,
@@ -182,17 +182,17 @@ mod service_tests {
         min_hourly_wage_test_period_2021_12: 2021, 12, 2021, 12, 9050,
     );
     crate::test_examples_int_salary! (test_examples_2022, |x: &dyn IPropsSalary| {x.min_hourly_wage()},
-        min_hourly_wage_test_period_2022_01: 2022, 1, 2022, 1, 9050,
-        min_hourly_wage_test_period_2022_02: 2022, 2, 2022, 2, 9050,
-        min_hourly_wage_test_period_2022_03: 2022, 3, 2022, 3, 9050,
-        min_hourly_wage_test_period_2022_04: 2022, 4, 2022, 4, 9050,
-        min_hourly_wage_test_period_2022_05: 2022, 5, 2022, 5, 9050,
-        min_hourly_wage_test_period_2022_06: 2022, 6, 2022, 6, 9050,
-        min_hourly_wage_test_period_2022_07: 2022, 7, 2022, 7, 9050,
-        min_hourly_wage_test_period_2022_08: 2022, 8, 2022, 8, 9050,
-        min_hourly_wage_test_period_2022_09: 2022, 9, 2022, 9, 9050,
-        min_hourly_wage_test_period_2022_10: 2022, 10, 2022, 10, 9050,
-        min_hourly_wage_test_period_2022_11: 2022, 11, 2022, 11, 9050,
-        min_hourly_wage_test_period_2022_12: 2022, 12, 2022, 12, 9050,
+        min_hourly_wage_test_period_2022_01: 2022, 1, 2022, 1, 9640,
+        min_hourly_wage_test_period_2022_02: 2022, 2, 2022, 2, 9640,
+        min_hourly_wage_test_period_2022_03: 2022, 3, 2022, 3, 9640,
+        min_hourly_wage_test_period_2022_04: 2022, 4, 2022, 4, 9640,
+        min_hourly_wage_test_period_2022_05: 2022, 5, 2022, 5, 9640,
+        min_hourly_wage_test_period_2022_06: 2022, 6, 2022, 6, 9640,
+        min_hourly_wage_test_period_2022_07: 2022, 7, 2022, 7, 9640,
+        min_hourly_wage_test_period_2022_08: 2022, 8, 2022, 8, 9640,
+        min_hourly_wage_test_period_2022_09: 2022, 9, 2022, 9, 9640,
+        min_hourly_wage_test_period_2022_10: 2022, 10, 2022, 10, 9640,
+        min_hourly_wage_test_period_2022_11: 2022, 11, 2022, 11, 9640,
+        min_hourly_wage_test_period_2022_12: 2022, 12, 2022, 12, 9640,
     );
 }

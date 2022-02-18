@@ -1,7 +1,7 @@
 #[cfg(test)]
 
 mod service_tests {
-    #[cfg(test_report)]
+    //#[cfg(test_report)]
     #[macro_use(crate::report_test_examples_int_social)]
     crate::report_test_examples_int_social!(
         test_examples_report,
@@ -182,17 +182,17 @@ mod service_tests {
         max_annuals_basis_test_period_2021_12: 2021, 12, 2021, 12, 1701168,
     );
     crate::test_examples_int_social! (test_examples_2022, |x: &dyn IPropsSocial| {x.max_annuals_basis()},
-        max_annuals_basis_test_period_2022_01: 2022, 1, 2022, 1, 1701168,
-        max_annuals_basis_test_period_2022_02: 2022, 2, 2022, 2, 1701168,
-        max_annuals_basis_test_period_2022_03: 2022, 3, 2022, 3, 1701168,
-        max_annuals_basis_test_period_2022_04: 2022, 4, 2022, 4, 1701168,
-        max_annuals_basis_test_period_2022_05: 2022, 5, 2022, 5, 1701168,
-        max_annuals_basis_test_period_2022_06: 2022, 6, 2022, 6, 1701168,
-        max_annuals_basis_test_period_2022_07: 2022, 7, 2022, 7, 1701168,
-        max_annuals_basis_test_period_2022_08: 2022, 8, 2022, 8, 1701168,
-        max_annuals_basis_test_period_2022_09: 2022, 9, 2022, 9, 1701168,
-        max_annuals_basis_test_period_2022_10: 2022, 10, 2022, 10, 1701168,
-        max_annuals_basis_test_period_2022_11: 2022, 11, 2022, 11, 1701168,
-        max_annuals_basis_test_period_2022_12: 2022, 12, 2022, 12, 1701168,
+        max_annuals_basis_test_period_2022_01: 2022, 1, 2022, 1, 1867728,
+        max_annuals_basis_test_period_2022_02: 2022, 2, 2022, 2, 1867728,
+        max_annuals_basis_test_period_2022_03: 2022, 3, 2022, 3, 1867728,
+        max_annuals_basis_test_period_2022_04: 2022, 4, 2022, 4, 1867728,
+        max_annuals_basis_test_period_2022_05: 2022, 5, 2022, 5, 1867728,
+        max_annuals_basis_test_period_2022_06: 2022, 6, 2022, 6, 1867728,
+        max_annuals_basis_test_period_2022_07: 2022, 7, 2022, 7, 1867728,
+        max_annuals_basis_test_period_2022_08: 2022, 8, 2022, 8, 1867728,
+        max_annuals_basis_test_period_2022_09: 2022, 9, 2022, 9, 1867728,
+        max_annuals_basis_test_period_2022_10: 2022, 10, 2022, 10, 1867728,
+        max_annuals_basis_test_period_2022_11: 2022, 11, 2022, 11, 1867728,
+        max_annuals_basis_test_period_2022_12: 2022, 12, 2022, 12, 1867728,
     );
 }

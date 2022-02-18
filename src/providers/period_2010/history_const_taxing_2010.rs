@@ -1,5 +1,5 @@
-use rust_decimal::Decimal;
 use rust_decimal_macros::dec;
+use rust_decimal::Decimal;
 use crate::providers::history_const_salary::HistoryConstSalary;
 use crate::providers::history_const_taxing::HistoryConstTaxing;
 use crate::providers::period_2010::history_const_salary_2010::HistoryConstSalary2010;
@@ -64,8 +64,8 @@ impl HistoryConstTaxing for HistoryConstTaxing2010 {
     const SETTLEMENT_CHILD_3RD: i32 = HistoryConstTaxing2010::ALLOWANCE_CHILD_3RD;
     const FACTOR_ADVANCES: Decimal = dec!(15);
     const FACTOR_WITHHOLD: Decimal = dec!(15);
-    const FACTOR_SOLITARY: Decimal = dec!(0);
-    const FACTOR_TAXRATE2: Decimal = dec!(0);
+    const FACTOR_SOLITARY: Decimal = Decimal::ZERO;
+    const FACTOR_TAXRATE2: Decimal = Decimal::ZERO;
     const MIN_AMOUNT_OF_TAXBONUS: i32 = 50;
     const MAX_AMOUNT_OF_TAXBONUS: i32 = 4350;
     const MARGIN_INCOME_OF_TAXBONUS: i32 = (HistoryConstSalary2010::MIN_MONTHLY_WAGE / 2);

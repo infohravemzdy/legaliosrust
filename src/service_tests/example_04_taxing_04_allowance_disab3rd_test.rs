@@ -1,7 +1,7 @@
 #[cfg(test)]
 
 mod service_tests {
-    #[cfg(test_report)]
+    //#[cfg(test_report)]
     #[macro_use(crate::test_examples_int_taxing)]
     crate::report_test_examples_int_taxing!(
         test_examples_report,

@@ -1,7 +1,7 @@
 #[cfg(test)]
 
 mod service_tests {
-    #[cfg(test_report)]
+    //#[cfg(test_report)]
     #[macro_use(crate::test_examples_int_taxing)]
     crate::report_test_examples_int_taxing!(
         test_examples_report,
@@ -182,17 +182,17 @@ mod service_tests {
         margin_income_of_tax_bonus_test_period_2021_12: 2021, 12, 2021, 12, 7600,
     );
     crate::test_examples_int_taxing! (test_examples_2022, |x: &dyn IPropsTaxing| {x.margin_income_of_tax_bonus()},
-        margin_income_of_tax_bonus_test_period_2022_01: 2022, 1, 2022, 1, 7600,
-        margin_income_of_tax_bonus_test_period_2022_02: 2022, 2, 2022, 2, 7600,
-        margin_income_of_tax_bonus_test_period_2022_03: 2022, 3, 2022, 3, 7600,
-        margin_income_of_tax_bonus_test_period_2022_04: 2022, 4, 2022, 4, 7600,
-        margin_income_of_tax_bonus_test_period_2022_05: 2022, 5, 2022, 5, 7600,
-        margin_income_of_tax_bonus_test_period_2022_06: 2022, 6, 2022, 6, 7600,
-        margin_income_of_tax_bonus_test_period_2022_07: 2022, 7, 2022, 7, 7600,
-        margin_income_of_tax_bonus_test_period_2022_08: 2022, 8, 2022, 8, 7600,
-        margin_income_of_tax_bonus_test_period_2022_09: 2022, 9, 2022, 9, 7600,
-        margin_income_of_tax_bonus_test_period_2022_10: 2022, 10, 2022, 10, 7600,
-        margin_income_of_tax_bonus_test_period_2022_11: 2022, 11, 2022, 11, 7600,
-        margin_income_of_tax_bonus_test_period_2022_12: 2022, 12, 2022, 12, 7600,
+        margin_income_of_tax_bonus_test_period_2022_01: 2022, 1, 2022, 1, 8100,
+        margin_income_of_tax_bonus_test_period_2022_02: 2022, 2, 2022, 2, 8100,
+        margin_income_of_tax_bonus_test_period_2022_03: 2022, 3, 2022, 3, 8100,
+        margin_income_of_tax_bonus_test_period_2022_04: 2022, 4, 2022, 4, 8100,
+        margin_income_of_tax_bonus_test_period_2022_05: 2022, 5, 2022, 5, 8100,
+        margin_income_of_tax_bonus_test_period_2022_06: 2022, 6, 2022, 6, 8100,
+        margin_income_of_tax_bonus_test_period_2022_07: 2022, 7, 2022, 7, 8100,
+        margin_income_of_tax_bonus_test_period_2022_08: 2022, 8, 2022, 8, 8100,
+        margin_income_of_tax_bonus_test_period_2022_09: 2022, 9, 2022, 9, 8100,
+        margin_income_of_tax_bonus_test_period_2022_10: 2022, 10, 2022, 10, 8100,
+        margin_income_of_tax_bonus_test_period_2022_11: 2022, 11, 2022, 11, 8100,
+        margin_income_of_tax_bonus_test_period_2022_12: 2022, 12, 2022, 12, 8100,
     );
 }

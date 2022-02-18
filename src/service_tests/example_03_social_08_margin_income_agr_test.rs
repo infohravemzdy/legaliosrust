@@ -1,7 +1,7 @@
 #[cfg(test)]
 
 mod service_tests {
-    #[cfg(test_report)]
+    //#[cfg(test_report)]
     #[macro_use(crate::report_test_examples_int_social)]
     crate::report_test_examples_int_social!(
         test_examples_report,
@@ -28,18 +28,18 @@ mod service_tests {
         margin_income_agr_test_period_2010_12: 2010, 12, 2010, 12, 0,
     );
     crate::test_examples_int_social! (test_examples_2011, |x: &dyn IPropsSocial| {x.margin_income_agr()},
-        margin_income_agr_test_period_2011_01: 2011, 1, 2011, 1, 2000,
-        margin_income_agr_test_period_2011_02: 2011, 2, 2011, 2, 2000,
-        margin_income_agr_test_period_2011_03: 2011, 3, 2011, 3, 2000,
-        margin_income_agr_test_period_2011_04: 2011, 4, 2011, 4, 2000,
-        margin_income_agr_test_period_2011_05: 2011, 5, 2011, 5, 2000,
-        margin_income_agr_test_period_2011_06: 2011, 6, 2011, 6, 2000,
-        margin_income_agr_test_period_2011_07: 2011, 7, 2011, 7, 2000,
-        margin_income_agr_test_period_2011_08: 2011, 8, 2011, 8, 2000,
-        margin_income_agr_test_period_2011_09: 2011, 9, 2011, 9, 2000,
-        margin_income_agr_test_period_2011_10: 2011, 10, 2011, 10, 2000,
-        margin_income_agr_test_period_2011_11: 2011, 11, 2011, 11, 2000,
-        margin_income_agr_test_period_2011_12: 2011, 12, 2011, 12, 2000,
+        margin_income_agr_test_period_2011_01: 2011, 1, 2011, 1, 0,
+        margin_income_agr_test_period_2011_02: 2011, 2, 2011, 2, 0,
+        margin_income_agr_test_period_2011_03: 2011, 3, 2011, 3, 0,
+        margin_income_agr_test_period_2011_04: 2011, 4, 2011, 4, 0,
+        margin_income_agr_test_period_2011_05: 2011, 5, 2011, 5, 0,
+        margin_income_agr_test_period_2011_06: 2011, 6, 2011, 6, 0,
+        margin_income_agr_test_period_2011_07: 2011, 7, 2011, 7, 0,
+        margin_income_agr_test_period_2011_08: 2011, 8, 2011, 8, 0,
+        margin_income_agr_test_period_2011_09: 2011, 9, 2011, 9, 0,
+        margin_income_agr_test_period_2011_10: 2011, 10, 2011, 10, 0,
+        margin_income_agr_test_period_2011_11: 2011, 11, 2011, 11, 0,
+        margin_income_agr_test_period_2011_12: 2011, 12, 2011, 12, 0,
     );
     crate::test_examples_int_social! (test_examples_2012, |x: &dyn IPropsSocial| {x.margin_income_agr()},
         margin_income_agr_test_period_2012_01: 2012, 1, 2012, 1, 10001,

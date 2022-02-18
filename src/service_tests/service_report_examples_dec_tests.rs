@@ -7,7 +7,6 @@ pub mod service_examples_tests {
                 use std::error::Error;
 
                 use rust_decimal::Decimal;
-                use rust_decimal_macros::dec;
                 use crate::service::period;
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
@@ -71,7 +70,6 @@ pub mod service_examples_tests {
                 use std::error::Error;
 
                 use rust_decimal::Decimal;
-                use rust_decimal_macros::dec;
                 use crate::service::period;
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
@@ -135,7 +133,6 @@ pub mod service_examples_tests {
                 use std::error::Error;
 
                 use rust_decimal::Decimal;
-                use rust_decimal_macros::dec;
                 use crate::service::period;
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
@@ -199,7 +196,6 @@ pub mod service_examples_tests {
                 use std::error::Error;
 
                 use rust_decimal::Decimal;
-                use rust_decimal_macros::dec;
                 use crate::service::period;
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;

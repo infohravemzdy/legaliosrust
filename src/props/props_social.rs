@@ -1,5 +1,4 @@
 use rust_decimal::Decimal;
-use crate::props::particy_result::IParticyResult;
 use crate::props::props::IProps;
 use crate::props::props_social_base::{IPropsSocial, PropsSocialBase};
 use crate::service::contract_terms::WorkSocialTerms;
@@ -38,6 +37,32 @@ impl PropsSocial {
             props: PropsSocialBase::empty(),
         }
     }
+    fn has_term_exemption_particy(_term: &WorkSocialTerms) -> bool {
+        return false;
+    }
+
+    fn has_income_based_employment_particy(term: &WorkSocialTerms) -> bool {
+        return match term {
+            WorkSocialTerms::SocialTermEmployments => true,
+            _ => false,
+        };
+    }
+
+    fn has_income_based_agreements_particy(_term: &WorkSocialTerms) -> bool {
+        return false;
+    }
+
+    fn has_income_cumulated_particy(term: &WorkSocialTerms) -> bool {
+        match term {
+            WorkSocialTerms::SocialTermEmployments => false,
+            WorkSocialTerms::SocialTermAgreemTask => false,
+            WorkSocialTerms::SocialTermSmallsEmpl => false,
+            WorkSocialTerms::SocialTermShortsMeet => false,
+            WorkSocialTerms::SocialTermShortsDeny => false,
+            WorkSocialTerms::SocialTermByContract => false,
+        }
+    }
+
 }
 
 impl IProps for PropsSocial {
@@ -77,38 +102,8 @@ impl IPropsSocial for PropsSocial {
         self.props.margin_income_agr()
     }
 
-    fn value_equals(&self, other: Option<&Self>) -> bool {
-        if other.is_none() {
-            return false;
-        }
-        let other_social = other.unwrap();
-        return self.props.value_equals(Some(&other_social.props));
-    }
-
-    fn has_term_exemption_particy(_term: &WorkSocialTerms) -> bool {
-        return false;
-    }
-
-    fn has_income_based_employment_particy(term: &WorkSocialTerms) -> bool {
-        return match term {
-            WorkSocialTerms::SocialTermEmployments => true,
-            _ => false,
-        };
-    }
-
-    fn has_income_based_agreements_particy(_term: &WorkSocialTerms) -> bool {
-        return false;
-    }
-
-    fn has_income_cumulated_particy(term: &WorkSocialTerms) -> bool {
-        match term {
-            WorkSocialTerms::SocialTermEmployments => false,
-            WorkSocialTerms::SocialTermAgreemTask => false,
-            WorkSocialTerms::SocialTermSmallsEmpl => false,
-            WorkSocialTerms::SocialTermShortsMeet => false,
-            WorkSocialTerms::SocialTermShortsDeny => false,
-            WorkSocialTerms::SocialTermByContract => false,
-        }
+    fn value_equals(&self, other_social: &dyn IPropsSocial) -> bool {
+        return self.props.value_equals(other_social);
     }
 
     fn has_particy(&self, term: &WorkSocialTerms, income_term: i32, income_spec: i32) -> bool {
@@ -131,8 +126,8 @@ impl IPropsSocial for PropsSocial {
         return self.props.result_overcaps(base_suma, over_caps);
     }
 
-    fn annuals_basis_cut<T: IParticyResult>(&self, particy_list: Vec<T>, income_list: Vec<T>, annuity_basis: i32) -> (i32, i32, Vec<T>) {
-        return self.props.annuals_basis_cut::<T>(particy_list, income_list, annuity_basis);
-    }
+    // fn annuals_basis_cut(&self, income_list: Vec<impl IParticyResult>, annuity_basis: i32) -> (i32, i32) {
+    //     return self.props.annuals_basis_cut(income_list, annuity_basis);
+    // }
 }
 
