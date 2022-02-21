@@ -41,6 +41,39 @@ pub mod service_examples_tests {
         Some(file_handle)
     }
 
+    pub fn create_expected_file(file_name: &str) -> Option<File> {
+        const PARENT_REPORT_FOLDER_NAME: &str = "legalios";
+        const REPORT_FOLDER_NAME: &str = "test_expected";
+        let res_curr_path = std::env::current_dir();
+        if res_curr_path.is_err(){
+            return None;
+        }
+        let mut curr_path = res_curr_path.unwrap();
+        while !curr_path.ends_with(PARENT_REPORT_FOLDER_NAME) && curr_path.ancestors().count() != 1 {
+            curr_path.pop();
+        }
+        let base_path = curr_path.join(REPORT_FOLDER_NAME);
+        let res_norm_path = fs::canonicalize(&base_path);
+        if res_norm_path.is_err(){
+            return None;
+        }
+        let norm_path = res_norm_path.unwrap();
+
+        let file_path = norm_path.join(file_name);
+
+        let res_file_handle = OpenOptions::new()
+            .create(true)
+            .write(true)
+            .truncate(true)
+            .open(file_path);
+        if res_file_handle.is_err(){
+            return None;
+        }
+        let file_handle = res_file_handle.unwrap();
+
+        Some(file_handle)
+    }
+
     pub fn write_report_head(opt_file_handle: &mut Option<File>) {
         if opt_file_handle.is_none(){
             return;

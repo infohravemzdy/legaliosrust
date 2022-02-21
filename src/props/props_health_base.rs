@@ -1,7 +1,7 @@
 use std::cmp::max;
 use rust_decimal::Decimal;
 use rust_decimal::prelude::FromPrimitive;
-use crate::props::particy_result::IParticyResult;
+use crate::props::particy_result::{IParticyResult, ParticyResult};
 use crate::props::props::IProps;
 use crate::service::contract_terms::WorkHealthTerms;
 use crate::service::version_id::VersionId;
@@ -24,6 +24,7 @@ pub trait IPropsHealth : IProps {
     fn rounded_augment_employee_paym(&self, basis_generals: i32, basis_augment: i32) ->  i32;
     fn rounded_augment_employer_paym(&self, basis_generals: i32, base_employee: i32, base_employer: i32) ->  i32;
     fn rounded_employer_paym(&self, basis_result: i32) ->  i32;
+    fn annuals_basis_cut(&self, income_list: &mut [ParticyResult], annuity_basis: i32) -> (i32, i32);
 }
 
 #[derive(Debug, Copy, Clone)]
@@ -75,11 +76,11 @@ impl PropsHealthBase {
             margin_income_agr: 0,
         }
     }
-    fn maxim_result_cut(income_list: Vec<impl IParticyResult>, annuity_basis: i32, annualy_maxim: i32) -> (i32, i32) {
+    fn maxim_result_cut(income_list: &mut [ParticyResult], annuity_basis: i32, annualy_maxim: i32) -> (i32, i32) {
         let annuals_basis = max(0, annualy_maxim - annuity_basis);
         let result_init= (annualy_maxim, annuals_basis);
 
-        let result_list = income_list.into_iter().fold(result_init, |agr, mut x| {
+        let result_list = income_list.into_iter().fold(result_init, |agr, x| {
             let raw_annuals_basis: i32 = x.result_basis();
             let mut cut_annuals_basis: i32 = 0;
             let mut rem_annuals_basis: i32 = agr.1;
@@ -243,7 +244,7 @@ impl IPropsHealth for PropsHealthBase {
         return max(0, compound_payment - employee_payment);
     }
 
-    // fn annuals_basis_cut(&self, income_list: Vec<impl IParticyResult>, annuity_basis: i32) -> (i32, i32) {
-    //     return Self::maxim_result_cut(income_list, annuity_basis, self.max_annuals_basis);
-    // }
+     fn annuals_basis_cut(&self, income_list: &mut [ParticyResult], annuity_basis: i32) -> (i32, i32) {
+         return Self::maxim_result_cut(income_list, annuity_basis, self.max_annuals_basis);
+     }
 }

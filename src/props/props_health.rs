@@ -1,4 +1,5 @@
 use rust_decimal::Decimal;
+use crate::props::particy_result::ParticyResult;
 use crate::props::props::IProps;
 use crate::props::props_health_base::{IPropsHealth, PropsHealthBase};
 use crate::service::contract_terms::WorkHealthTerms;
@@ -128,7 +129,7 @@ impl IPropsHealth for PropsHealth {
         return self.props.rounded_employer_paym(basis_result);
     }
 
-    // fn annuals_basis_cut(&self, income_list: Vec<impl IParticyResult>, annuity_basis: i32) -> (i32, i32) {
-    //     return self.props.annuals_basis_cut(income_list, annuity_basis);
-    // }
+    fn annuals_basis_cut(&self, income_list: &mut [ParticyResult], annuity_basis: i32) -> (i32, i32) {
+        return self.props.annuals_basis_cut(income_list, annuity_basis);
+    }
 }

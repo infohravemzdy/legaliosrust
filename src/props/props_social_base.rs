@@ -1,7 +1,7 @@
 use std::cmp::max;
 use rust_decimal::Decimal;
 use rust_decimal::prelude::FromPrimitive;
-use crate::props::particy_result::IParticyResult;
+use crate::props::particy_result::{IParticyResult, ParticyResult};
 use crate::props::props::IProps;
 use crate::service::contract_terms::WorkSocialTerms;
 use crate::service::{operations_dec, operations_round};
@@ -22,6 +22,7 @@ pub trait IPropsSocial : IProps {
     fn rounded_employee_paym(&self, basis_result: i32) -> i32;
     fn rounded_employer_paym(&self, basis_result: i32) -> i32;
     fn result_overcaps(&self, base_suma: i32, over_caps: i32) -> (i32, i32);
+    fn annuals_basis_cut(&self, income_list: &mut [ParticyResult], annuity_basis: i32) -> (i32, i32);
 }
 
 #[derive(Debug, Copy, Clone)]
@@ -73,11 +74,11 @@ impl PropsSocialBase {
             margin_income_agr: 0,
         }
     }
-    fn maxim_result_cut(income_list: Vec<impl IParticyResult>, annuity_basis: i32, annualy_maxim: i32) -> (i32, i32) {
+    fn maxim_result_cut(income_list: &mut [ParticyResult], annuity_basis: i32, annualy_maxim: i32) -> (i32, i32) {
         let annuals_basis = max(0, annualy_maxim - annuity_basis);
         let result_init = (annualy_maxim, annuals_basis);
 
-        let result_list = income_list.into_iter().fold(result_init, |agr, mut x| {
+        let result_list = income_list.into_iter().fold(result_init, |agr, x| {
             let raw_annuals_basis: i32 = x.result_basis();
             let mut cut_annuals_basis: i32 = 0;
             let mut rem_annuals_basis: i32 = agr.1;
@@ -220,8 +221,8 @@ impl IPropsSocial for PropsSocialBase {
         return (max_base_employee, val_base_overcaps);
     }
 
-    // fn annuals_basis_cut(&self, income_list: Vec<impl IParticyResult>, annuity_basis: i32) -> (i32, i32) {
-    //     return Self::maxim_result_cut(income_list, annuity_basis, self.max_annuals_basis);
-    // }
+    fn annuals_basis_cut(&self, income_list: &mut [ParticyResult], annuity_basis: i32) -> (i32, i32) {
+        return Self::maxim_result_cut(income_list, annuity_basis, self.max_annuals_basis);
+    }
 }
 

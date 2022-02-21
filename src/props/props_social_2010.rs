@@ -1,4 +1,5 @@
 use rust_decimal::Decimal;
+use crate::props::particy_result::ParticyResult;
 use crate::props::props::IProps;
 use crate::props::props_social_base::{IPropsSocial, PropsSocialBase};
 use crate::service::contract_terms::WorkSocialTerms;
@@ -126,8 +127,8 @@ impl IPropsSocial for PropsSocial2010 {
         return self.props.result_overcaps(base_suma, over_caps);
     }
 
-    // fn annuals_basis_cut(&self, income_list: Vec<impl IParticyResult>, annuity_basis: i32) -> (i32, i32) {
-    //     return self.props.annuals_basis_cut(income_list, annuity_basis);
-    // }
+    fn annuals_basis_cut(&self, income_list: &mut [ParticyResult], annuity_basis: i32) -> (i32, i32) {
+        return self.props.annuals_basis_cut(income_list, annuity_basis);
+    }
 }
 
