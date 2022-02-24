@@ -4,6 +4,7 @@ use crate::props::props_salary::{PropsSalary};
 use crate::props::props_social::PropsSocial;
 use crate::props::props_taxing::{PropsTaxing};
 use crate::props::props::IProps;
+use crate::props::props_health_base::IPropsHealth;
 use crate::providers::period_2010::provider_health_2010::ProviderHealth2010;
 use crate::providers::period_2010::provider_salary_2010::ProviderSalary2010;
 use crate::providers::period_2010::provider_social_2010::ProviderSocial2010;

@@ -1,7 +1,4 @@
-use std::cmp::{max, min};
-use std::ops::Add;
 use rust_decimal::Decimal;
-use rust_decimal::prelude::Zero;
 use crate::props::props::IProps;
 use crate::props::props_taxing_base::{IPropsTaxing, PropsTaxingBase};
 use crate::service::contract_terms::WorkTaxingTerms;
@@ -10,12 +7,12 @@ use crate::service::taxing_options::{TaxDeclBenfOption, TaxDeclDisabOption, TaxD
 use crate::service::version_id::VersionId;
 
 #[derive(Debug, Copy, Clone)]
-pub struct PropsTaxing {
+pub struct PropsTaxing2018 {
     props: PropsTaxingBase,
 }
 
 #[allow(dead_code)]
-impl PropsTaxing {
+impl PropsTaxing2018 {
     pub(crate) fn new(_version: VersionId,
                       _allowance_payer: i32,
                       _allowance_disab1st: i32,
@@ -37,8 +34,8 @@ impl PropsTaxing {
                       _margin_income_of_solidary: i32,
                       _margin_income_of_taxrate2: i32,
                       _margin_income_of_wth_emp: i32,
-                      _margin_income_of_wth_agr: i32) -> PropsTaxing {
-        PropsTaxing {
+                      _margin_income_of_wth_agr: i32) -> PropsTaxing2018 {
+        PropsTaxing2018 {
             props: PropsTaxingBase::new(_version,
                     _allowance_payer,
                     _allowance_disab1st,
@@ -63,20 +60,20 @@ impl PropsTaxing {
                     _margin_income_of_wth_agr),
         }
     }
-    pub(crate) fn empty() -> PropsTaxing {
-        PropsTaxing {
+    pub(crate) fn empty() -> PropsTaxing2018 {
+        PropsTaxing2018 {
             props: PropsTaxingBase::empty(),
         }
     }
 }
 
-impl IProps for PropsTaxing {
+impl IProps for PropsTaxing2018 {
     fn get_version(&self) -> VersionId {
         self.props.get_version()
     }
 }
 
-impl IPropsTaxing for PropsTaxing {
+impl IPropsTaxing for PropsTaxing2018 {
     fn allowance_payer(&self) -> i32 {
         self.props.allowance_payer()
     }
@@ -165,7 +162,7 @@ impl IPropsTaxing for PropsTaxing {
         return self.props.value_equals(other_taxing);
     }
 
-    fn has_withhold_income(&self, _term_opt: WorkTaxingTerms, _sgn_opt: TaxDeclSignOption, _none_opt: TaxNoneSignOption, _income_sum: i32) -> bool {
+    fn has_withhold_income(&self, term_opt: WorkTaxingTerms, sgn_opt: TaxDeclSignOption, none_opt: TaxNoneSignOption, income_sum: i32) -> bool {
         //*****************************************************************************
         // Tax income for advance from Year 2014 to Year 2017
         //*****************************************************************************
@@ -176,33 +173,30 @@ impl IPropsTaxing for PropsTaxing {
         // -- income from statutory employment and non-resident is always withhold tax
 
         let mut withhold_income: bool = false;
-        if _sgn_opt != TaxDeclSignOption::DeclTaxNoSigned {
+        if sgn_opt != TaxDeclSignOption::DeclTaxNoSigned {
             return false;
         }
-        if _none_opt != TaxNoneSignOption::NosignTaxWithhold {
+        if none_opt != TaxNoneSignOption::NosignTaxWithhold {
             return false;
         }
-        if _term_opt == WorkTaxingTerms::TaxingTermAgreemTask {
-            if self.margin_income_of_wth_agr() == 0 || _income_sum <= self.margin_income_of_wth_agr() {
-                if _income_sum > 0 {
+        if term_opt == WorkTaxingTerms::TaxingTermAgreemTask {
+            if self.margin_income_of_wth_agr() == 0 || income_sum <= self.margin_income_of_wth_agr() {
+                if income_sum > 0 {
                     withhold_income = true;
                 }
             }
-            return withhold_income;
         }
-        if _term_opt == WorkTaxingTerms::TaxingTermEmployments {
-            if self.margin_income_of_wth_emp() == 0 || _income_sum <= self.margin_income_of_wth_emp() {
-                if _income_sum > 0 {
+        else if term_opt == WorkTaxingTerms::TaxingTermEmployments {
+            if self.margin_income_of_wth_emp() == 0 || income_sum <= self.margin_income_of_wth_emp() {
+                if income_sum > 0 {
                     withhold_income = true;
                 }
             }
-            return withhold_income;
         }
-        if _term_opt == WorkTaxingTerms::TaxingTermStatutPart {
-            if _income_sum > 0 {
+        else if term_opt == WorkTaxingTerms::TaxingTermStatutPart {
+            if income_sum > 0 {
                 withhold_income = true;
             }
-            return withhold_income;
         }
         return withhold_income;
     }
@@ -253,25 +247,14 @@ impl IPropsTaxing for PropsTaxing {
 
     fn rounded_advances_paym(&self, _supers_result: i32, _basis_result: i32) -> i32 {
         let factor_advances = operations_dec::divide(self.factor_advances(), Decimal::from(100));
-        let factor_tax_rate2 = operations_dec::divide(self.factor_taxrate2(), Decimal::from(100));
 
-        let mut tax_rate1basis: i32 = _basis_result;
-        let mut tax_rate2basis: i32 = 0;
-        if self.margin_income_of_taxrate2() != 0 {
-            tax_rate1basis = min(_basis_result, self.margin_income_of_taxrate2());
-            tax_rate2basis = max(0, _basis_result - self.margin_income_of_taxrate2());
-        }
-        let tax_rate1taxing: Decimal;
+        let advance_taxing: i32;
         if _basis_result <= self.margin_income_of_rounding() {
-            tax_rate1taxing = operations_dec::multiply(Decimal::from(tax_rate1basis), factor_advances);
-        } else 	{
-            tax_rate1taxing = operations_dec::multiply(Decimal::from(tax_rate1basis), factor_advances);
+            advance_taxing = PropsTaxingBase::int_tax_round_up(operations_dec::multiply(Decimal::from(_supers_result), factor_advances));
+            return advance_taxing;
         }
-        let mut tax_rate2taxing: Decimal = Decimal::zero();
-        if self.margin_income_of_taxrate2() != 0 {
-            tax_rate2taxing = operations_dec::multiply(Decimal::from(tax_rate2basis), factor_tax_rate2);
-        }
-        return PropsTaxingBase::int_tax_round_up(tax_rate1taxing.add(tax_rate2taxing));
+        advance_taxing = PropsTaxingBase::int_tax_round_up(operations_dec::multiply(Decimal::from(_supers_result), factor_advances));
+        return advance_taxing;
     }
 
     fn rounded_solidary_paym(&self, basis_result: i32) -> i32 {

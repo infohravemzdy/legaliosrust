@@ -1,3 +1,4 @@
+#[derive(Debug, Copy, Clone)]
 #[derive(PartialEq)]
 pub enum WorkContractTerms {
     WorktermEmployment1 = 0,
@@ -6,6 +7,7 @@ pub enum WorkContractTerms {
     WorktermPartnerStat = 3,
 }
 
+#[derive(Debug, Copy, Clone)]
 #[derive(PartialEq)]
 pub enum WorkTaxingTerms {
     TaxingTermByContract = 0,
@@ -14,6 +16,7 @@ pub enum WorkTaxingTerms {
     TaxingTermStatutPart = 3,
 }
 
+#[derive(Debug, Copy, Clone)]
 #[derive(PartialEq)]
 pub enum WorkHealthTerms {
     HealthTermByContract = 0,
@@ -22,6 +25,7 @@ pub enum WorkHealthTerms {
     HealthTermAgreemTask = 3,
 }
 
+#[derive(Debug, Copy, Clone)]
 #[derive(PartialEq)]
 pub enum WorkSocialTerms {
     SocialTermByContract = 0,

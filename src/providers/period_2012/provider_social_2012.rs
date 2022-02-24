@@ -1,6 +1,6 @@
 ﻿use rust_decimal::Decimal;
 use crate::props::props::IProps;
-use crate::props::props_social::PropsSocial;
+use crate::props::props_social_2012::PropsSocial2012;
 use crate::providers::history_const_social::HistoryConstSocial;
 use crate::providers::period_2012::history_const_social_2012::HistoryConstSocial2012;
 use crate::providers::props_provider::IPropsProvider;
@@ -57,12 +57,12 @@ impl IProps for ProviderSocial2012 {
     }
 }
 
-impl IPropsProvider<PropsSocial> for ProviderSocial2012 {
+impl IPropsProvider<PropsSocial2012> for ProviderSocial2012 {
     fn get_version(&self) -> VersionId {
         self.version
     }
-    fn get_props(&self, _period: &dyn IPeriod) -> PropsSocial {
-        PropsSocial::new(self.version,
+    fn get_props(&self, _period: &dyn IPeriod) -> PropsSocial2012 {
+        PropsSocial2012::new(self.version,
                          self.max_annuals_basis(_period),
                          self.factor_employer(_period),
                          self.factor_employer_higher(_period),

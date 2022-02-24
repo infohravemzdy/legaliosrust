@@ -1,7 +1,7 @@
 use std::cmp::max;
 use rust_decimal::Decimal;
 use rust_decimal::prelude::FromPrimitive;
-use crate::props::particy_result::{IParticyResult, ParticyResult};
+use crate::props::particy_results::{ParticyHealthResult, ParticyHealthTarget};
 use crate::props::props::IProps;
 use crate::service::contract_terms::WorkHealthTerms;
 use crate::service::version_id::VersionId;
@@ -24,7 +24,7 @@ pub trait IPropsHealth : IProps {
     fn rounded_augment_employee_paym(&self, basis_generals: i32, basis_augment: i32) ->  i32;
     fn rounded_augment_employer_paym(&self, basis_generals: i32, base_employee: i32, base_employer: i32) ->  i32;
     fn rounded_employer_paym(&self, basis_result: i32) ->  i32;
-    fn annuals_basis_cut(&self, income_list: &mut [ParticyResult], annuity_basis: i32) -> (i32, i32);
+    fn annuals_basis_cut(&self, income_list: &Vec<ParticyHealthTarget>, annuity_basis: i32) -> (i32, i32, Vec<ParticyHealthResult>);
 }
 
 #[derive(Debug, Copy, Clone)]
@@ -75,29 +75,6 @@ impl PropsHealthBase {
             margin_income_emp: 0,
             margin_income_agr: 0,
         }
-    }
-    fn maxim_result_cut(income_list: &mut [ParticyResult], annuity_basis: i32, annualy_maxim: i32) -> (i32, i32) {
-        let annuals_basis = max(0, annualy_maxim - annuity_basis);
-        let result_init= (annualy_maxim, annuals_basis);
-
-        let result_list = income_list.into_iter().fold(result_init, |agr, x| {
-            let raw_annuals_basis: i32 = x.result_basis();
-            let mut cut_annuals_basis: i32 = 0;
-            let mut rem_annuals_basis: i32 = agr.1;
-
-            if x.particy_code() != 0 {
-                cut_annuals_basis = raw_annuals_basis;
-                if agr.0 > 0 {
-                    let ovr_annuals_basis = max(0, raw_annuals_basis - agr.1);
-                    cut_annuals_basis = raw_annuals_basis - ovr_annuals_basis;
-                }
-                rem_annuals_basis = max(0, agr.1 - cut_annuals_basis);
-            }
-
-            x.set_result_value(max(0, cut_annuals_basis));
-            return (agr.0, rem_annuals_basis);
-        });
-        return result_list;
     }
     fn dec_insurance_round_up(value_dec: Decimal) -> Decimal {
         return operations_round::dec_round_up(value_dec);
@@ -244,7 +221,34 @@ impl IPropsHealth for PropsHealthBase {
         return max(0, compound_payment - employee_payment);
     }
 
-     fn annuals_basis_cut(&self, income_list: &mut [ParticyResult], annuity_basis: i32) -> (i32, i32) {
-         return Self::maxim_result_cut(income_list, annuity_basis, self.max_annuals_basis);
+     fn annuals_basis_cut(&self, income_list: &Vec<ParticyHealthTarget>, annuity_basis: i32) -> (i32, i32, Vec<ParticyHealthResult>) {
+         let annualy_maxim: i32 = self.max_annuals_basis;
+         let annuals_basis = max(0, annualy_maxim - annuity_basis);
+         let result_init= (annualy_maxim, annuals_basis, vec![]);
+
+         let result_list = income_list.into_iter().fold(result_init, |agr, x| {
+             let raw_annuals_basis: i32 = x.get_targets_base();
+             let mut cut_annuals_basis: i32 = 0;
+             let mut rem_annuals_basis: i32 = agr.1;
+
+             if x.get_particy_code() != 0 {
+                 cut_annuals_basis = raw_annuals_basis;
+                 if agr.0 > 0 {
+                     let ovr_annuals_basis = max(0, raw_annuals_basis - agr.1);
+                     cut_annuals_basis = raw_annuals_basis - ovr_annuals_basis;
+                 }
+                 rem_annuals_basis = max(0, agr.1 - cut_annuals_basis);
+             }
+             let r = ParticyHealthResult::new(
+                 x.get_contract_code(),
+                 x.get_subject_type(),
+                 x.get_interest_code(),
+                 x.get_subject_term(),
+                 x.get_particy_code(),
+                 x.get_targets_base(),
+                 max(0, cut_annuals_basis));
+             return (agr.0, rem_annuals_basis, [agr.2, vec![r]].concat());
+         });
+         return result_list;
      }
 }

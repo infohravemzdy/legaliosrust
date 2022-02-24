@@ -6,12 +6,12 @@ use crate::service::contract_terms::WorkHealthTerms;
 use crate::service::version_id::VersionId;
 
 #[derive(Debug, Copy, Clone)]
-pub struct PropsHealth2010 {
+pub struct PropsHealth2014 {
     props: PropsHealthBase,
 }
 
 #[allow(dead_code)]
-impl PropsHealth2010 {
+impl PropsHealth2014 {
     pub(crate) fn new(_version: VersionId,
                       _min_monthly_basis: i32,
                       _max_annuals_basis: i32,
@@ -20,8 +20,8 @@ impl PropsHealth2010 {
                       _factor_compound: Decimal,
                       _factor_employee: Decimal,
                       _margin_income_emp: i32,
-                      _margin_income_agr: i32) -> PropsHealth2010 {
-        PropsHealth2010 {
+                      _margin_income_agr: i32) -> PropsHealth2014 {
+        PropsHealth2014 {
             props: PropsHealthBase::new(_version,
                     _min_monthly_basis,
                     _max_annuals_basis,
@@ -33,8 +33,8 @@ impl PropsHealth2010 {
                     _margin_income_agr),
         }
     }
-    pub(crate) fn empty() -> PropsHealth2010 {
-        PropsHealth2010 {
+    pub(crate) fn empty() -> PropsHealth2014 {
+        PropsHealth2014 {
             props: PropsHealthBase::empty(),
         }
     }
@@ -49,8 +49,11 @@ impl PropsHealth2010 {
         };
     }
 
-    fn has_income_based_agreements_particy(_term: &WorkHealthTerms) -> bool {
-        return false;
+    fn has_income_based_agreements_particy(term: &WorkHealthTerms) -> bool {
+        return match term {
+            WorkHealthTerms::HealthTermAgreemTask => true,
+            _ => false,
+        };
     }
 
     fn has_income_cumulated_particy(term: &WorkHealthTerms) -> bool {
@@ -63,11 +66,11 @@ impl PropsHealth2010 {
     }
 }
 
-impl IProps for PropsHealth2010 {
+impl IProps for PropsHealth2014 {
     fn get_version(&self) -> VersionId { self.props.get_version() }
 }
 
-impl IPropsHealth for PropsHealth2010 {
+impl IPropsHealth for PropsHealth2014 {
     fn min_monthly_basis(&self) -> i32 { self.props.min_monthly_basis() }
 
     fn max_annuals_basis(&self) -> i32 {

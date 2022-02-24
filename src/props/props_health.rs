@@ -1,5 +1,5 @@
 use rust_decimal::Decimal;
-use crate::props::particy_result::ParticyResult;
+use crate::props::particy_results::{ParticyHealthResult, ParticyHealthTarget};
 use crate::props::props::IProps;
 use crate::props::props_health_base::{IPropsHealth, PropsHealthBase};
 use crate::service::contract_terms::WorkHealthTerms;
@@ -49,15 +49,18 @@ impl PropsHealth {
         };
     }
 
-    fn has_income_based_agreements_particy(_term: &WorkHealthTerms) -> bool {
-        return false;
+    fn has_income_based_agreements_particy(term: &WorkHealthTerms) -> bool {
+        return match term {
+            WorkHealthTerms::HealthTermAgreemTask => true,
+            _ => false,
+        };
     }
 
     fn has_income_cumulated_particy(term: &WorkHealthTerms) -> bool {
         match term {
             WorkHealthTerms::HealthTermEmployments => false,
-            WorkHealthTerms::HealthTermAgreemWork => false,
-            WorkHealthTerms::HealthTermAgreemTask => false,
+            WorkHealthTerms::HealthTermAgreemWork => true,
+            WorkHealthTerms::HealthTermAgreemTask => true,
             WorkHealthTerms::HealthTermByContract => false,
         }
     }
@@ -129,7 +132,7 @@ impl IPropsHealth for PropsHealth {
         return self.props.rounded_employer_paym(basis_result);
     }
 
-    fn annuals_basis_cut(&self, income_list: &mut [ParticyResult], annuity_basis: i32) -> (i32, i32) {
+    fn annuals_basis_cut(&self, income_list: &Vec<ParticyHealthTarget>, annuity_basis: i32) -> (i32, i32, Vec<ParticyHealthResult>) {
         return self.props.annuals_basis_cut(income_list, annuity_basis);
     }
 }

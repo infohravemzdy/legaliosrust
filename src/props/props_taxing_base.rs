@@ -151,40 +151,40 @@ impl PropsTaxingBase {
             margin_income_of_wth_agr: 0
         }
     }
-    fn int_tax_round_up(value_dec: Decimal) -> i32 {
+    pub(crate) fn int_tax_round_up(value_dec: Decimal) -> i32 {
         return operations_round::round_up(value_dec);
     }
-    fn int_tax_round_near_up(value_dec: Decimal, nearest: i32) -> i32 {
+    pub(crate) fn int_tax_round_near_up(value_dec: Decimal, nearest: i32) -> i32 {
         return operations_round::near_round_up(value_dec, nearest);
     }
-    fn int_tax_round_near_up100(value_dec: Decimal) -> i32 {
+    pub(crate) fn int_tax_round_near_up100(value_dec: Decimal) -> i32 {
         return operations_round::near_round_up100(value_dec);
     }
-    fn int_tax_round_down(value_dec: Decimal ) -> i32 {
+    pub(crate) fn int_tax_round_down(value_dec: Decimal ) -> i32 {
         return operations_round::round_down(value_dec);
     }
-    fn int_tax_round_near_down(value_dec: Decimal, nearest: i32) -> i32 {
+    pub(crate) fn int_tax_round_near_down(value_dec: Decimal, nearest: i32) -> i32 {
         return operations_round::near_round_down(value_dec, nearest);
     }
-    fn int_tax_round_near_down100(value_dec: Decimal) -> i32 {
+    pub(crate) fn int_tax_round_near_down100(value_dec: Decimal) -> i32 {
         return operations_round::near_round_down100(value_dec);
     }
-    fn dec_tax_round_up(value_dec: Decimal) -> Decimal {
+    pub(crate) fn dec_tax_round_up(value_dec: Decimal) -> Decimal {
         return operations_round::dec_round_up(value_dec)
     }
-    fn dec_tax_round_near_up(value_dec: Decimal, nearest: i32) -> Decimal {
+    pub(crate) fn dec_tax_round_near_up(value_dec: Decimal, nearest: i32) -> Decimal {
         return operations_round::dec_near_round_up(value_dec, nearest);
     }
-    fn dec_tax_round_near_up100(value_dec: Decimal) -> Decimal {
+    pub(crate) fn dec_tax_round_near_up100(value_dec: Decimal) -> Decimal {
         return operations_round::dec_near_round_up100(value_dec);
     }
-    fn dec_tax_round_down(value_dec: Decimal) -> Decimal {
+    pub(crate) fn dec_tax_round_down(value_dec: Decimal) -> Decimal {
         return operations_round::dec_round_down(value_dec);
     }
-    fn dec_tax_round_near_down(value_dec: Decimal, nearest: i32) -> Decimal {
+    pub(crate) fn dec_tax_round_near_down(value_dec: Decimal, nearest: i32) -> Decimal {
         return operations_round::dec_near_round_down(value_dec, nearest);
     }
-    fn dec_tax_round_near_down100(value_dec: Decimal) -> Decimal {
+    pub(crate) fn dec_tax_round_near_down100(value_dec: Decimal) -> Decimal {
         return operations_round::dec_near_round_down100(value_dec);
     }
 }

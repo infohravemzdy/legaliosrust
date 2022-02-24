@@ -1,5 +1,5 @@
 use rust_decimal::Decimal;
-use crate::props::props_health::PropsHealth;
+use crate::props::props_health_2010::PropsHealth2010;
 use crate::providers::history_const_health::HistoryConstHealth;
 use crate::providers::period_2010::history_const_health_2010::HistoryConstHealth2010;
 use crate::providers::props_provider::IPropsProvider;
@@ -50,12 +50,12 @@ impl ProviderHealth2010 {
     }
 }
 
-impl IPropsProvider<PropsHealth> for ProviderHealth2010 {
+impl IPropsProvider<PropsHealth2010> for ProviderHealth2010 {
     fn get_version(&self) -> VersionId {
         self.version
     }
-    fn get_props(&self, _period: &dyn IPeriod) -> PropsHealth {
-        PropsHealth::new(self.version,
+    fn get_props(&self, _period: &dyn IPeriod) -> PropsHealth2010 {
+        PropsHealth2010::new(self.version,
                          self.min_monthly_basis(_period),
                          self.max_annuals_basis(_period),
                          self.lim_monthly_state(_period),

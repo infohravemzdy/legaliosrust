@@ -1,5 +1,5 @@
 use rust_decimal::Decimal;
-use crate::props::particy_result::ParticyResult;
+use crate::props::particy_results::{ParticySocialResult, ParticySocialTarget};
 use crate::props::props::IProps;
 use crate::props::props_social_base::{IPropsSocial, PropsSocialBase};
 use crate::service::contract_terms::WorkSocialTerms;
@@ -44,7 +44,7 @@ impl PropsSocial2010 {
 
     fn has_income_based_employment_particy(term: &WorkSocialTerms) -> bool {
         return match term {
-            WorkSocialTerms::SocialTermEmployments => true,
+            WorkSocialTerms::SocialTermSmallsEmpl => true,
             _ => false,
         };
     }
@@ -127,7 +127,7 @@ impl IPropsSocial for PropsSocial2010 {
         return self.props.result_overcaps(base_suma, over_caps);
     }
 
-    fn annuals_basis_cut(&self, income_list: &mut [ParticyResult], annuity_basis: i32) -> (i32, i32) {
+    fn annuals_basis_cut(&self, income_list: &Vec<ParticySocialTarget>, annuity_basis: i32) -> (i32, i32, Vec<ParticySocialResult>) {
         return self.props.annuals_basis_cut(income_list, annuity_basis);
     }
 }

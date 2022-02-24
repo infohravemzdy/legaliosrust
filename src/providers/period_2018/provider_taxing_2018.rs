@@ -1,6 +1,6 @@
 ﻿use rust_decimal::Decimal;
 use crate::props::props::IProps;
-use crate::props::props_taxing::{PropsTaxing};
+use crate::props::props_taxing_2018::PropsTaxing2018;
 use crate::providers::history_const_taxing::HistoryConstTaxing;
 use crate::providers::period_2018::history_const_taxing_2018::HistoryConstTaxing2018;
 use crate::providers::props_provider::IPropsProvider;
@@ -109,12 +109,12 @@ impl IProps for ProviderTaxing2018 {
     }
 }
 
-impl IPropsProvider<PropsTaxing> for ProviderTaxing2018 {
+impl IPropsProvider<PropsTaxing2018> for ProviderTaxing2018 {
     fn get_version(&self) -> VersionId {
         self.version
     }
-    fn get_props(&self, _period: &dyn IPeriod) -> PropsTaxing {
-        PropsTaxing::new(self.version,
+    fn get_props(&self, _period: &dyn IPeriod) -> PropsTaxing2018 {
+        PropsTaxing2018::new(self.version,
                          self.allowance_payer(_period),
                          self.allowance_disab1st(_period),
                          self.allowance_disab2nd(_period),

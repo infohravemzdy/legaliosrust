@@ -6,12 +6,12 @@ use crate::service::contract_terms::WorkSocialTerms;
 use crate::service::version_id::VersionId;
 
 #[derive(Debug, Copy, Clone)]
-pub struct PropsSocial {
+pub struct PropsSocial2012 {
     props: PropsSocialBase,
 }
 
 #[allow(dead_code)]
-impl PropsSocial {
+impl PropsSocial2012 {
     pub(crate) fn new(_version: VersionId,
                       _max_annuals_basis: i32,
                       _factor_employer: Decimal,
@@ -20,8 +20,8 @@ impl PropsSocial {
                       _factor_employee_garant: Decimal,
                       _factor_employee_reduce: Decimal,
                       _margin_income_emp: i32,
-                      _margin_income_agr: i32) -> PropsSocial {
-        PropsSocial {
+                      _margin_income_agr: i32) -> PropsSocial2012 {
+        PropsSocial2012 {
             props: PropsSocialBase::new(_version,
                     _max_annuals_basis,
                     _factor_employer,
@@ -33,8 +33,8 @@ impl PropsSocial {
                     _margin_income_agr),
         }
     }
-    pub(crate) fn empty() -> PropsSocial {
-        PropsSocial {
+    pub(crate) fn empty() -> PropsSocial2012 {
+        PropsSocial2012 {
             props: PropsSocialBase::empty(),
         }
     }
@@ -60,7 +60,7 @@ impl PropsSocial {
         match term {
             WorkSocialTerms::SocialTermEmployments => false,
             WorkSocialTerms::SocialTermAgreemTask => true,
-            WorkSocialTerms::SocialTermSmallsEmpl => true,
+            WorkSocialTerms::SocialTermSmallsEmpl => false,
             WorkSocialTerms::SocialTermShortsMeet => false,
             WorkSocialTerms::SocialTermShortsDeny => false,
             WorkSocialTerms::SocialTermByContract => false,
@@ -69,13 +69,13 @@ impl PropsSocial {
 
 }
 
-impl IProps for PropsSocial {
+impl IProps for PropsSocial2012 {
     fn get_version(&self) -> VersionId {
         self.props.get_version()
     }
 }
 
-impl IPropsSocial for PropsSocial {
+impl IPropsSocial for PropsSocial2012 {
     fn max_annuals_basis(&self) -> i32 { self.props.max_annuals_basis() }
 
     fn factor_employer(&self) -> Decimal {
