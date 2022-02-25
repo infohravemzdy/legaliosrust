@@ -1,6 +1,7 @@
 use std::cmp::max;
 use rust_decimal::Decimal;
 use rust_decimal::prelude::FromPrimitive;
+use crate::factories::provider_factory::BoxSocialProps;
 use crate::props::particy_results::{ParticySocialResult, ParticySocialTarget};
 use crate::props::props::IProps;
 use crate::service::contract_terms::WorkSocialTerms;
@@ -17,7 +18,7 @@ pub trait IPropsSocial : IProps {
     fn margin_income_emp(&self) -> i32;
     fn margin_income_agr(&self) -> i32;
 
-    fn value_equals(&self, other_social: &dyn IPropsSocial) -> bool;
+    fn value_equals(&self, other_social: &BoxSocialProps) -> bool;
     fn has_particy(&self, term: &WorkSocialTerms, income_term: i32, income_spec: i32) -> bool;
     fn rounded_employee_paym(&self, basis_result: i32) -> i32;
     fn rounded_employer_paym(&self, basis_result: i32) -> i32;
@@ -162,7 +163,7 @@ impl IPropsSocial for PropsSocialBase {
         self.margin_income_agr
     }
 
-    fn value_equals(&self, other_social: &dyn IPropsSocial) -> bool {
+    fn value_equals(&self, other_social: &BoxSocialProps) -> bool {
         return self.max_annuals_basis == other_social.max_annuals_basis() &&
             self.factor_employer == other_social.factor_employer() &&
             self.factor_employer_higher == other_social.factor_employer_higher() &&

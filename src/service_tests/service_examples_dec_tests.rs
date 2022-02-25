@@ -33,7 +33,7 @@ pub mod service_examples_tests {
                         use crate::service::service_legalios as legalios;
                         use crate::service::service_legalios::IServiceLegalios;
                         use crate::service::bundle_props::{IBundleProps};
-                        use crate::props::props_salary::{IPropsSalary};
+                        use crate::factories::provider_factory::{BoxSalaryProps};
                         $(
                             #[test]
                             fn $name() -> Result<(), Box<dyn Error>> {
@@ -111,7 +111,7 @@ pub mod service_examples_tests {
                         use crate::service::service_legalios as legalios;
                         use crate::service::service_legalios::IServiceLegalios;
                         use crate::service::bundle_props::{IBundleProps};
-                        use crate::props::props_health_base::{IPropsHealth};
+                        use crate::factories::provider_factory::{BoxHealthProps};
                         $(
                             #[test]
                             fn $name() -> Result<(), Box<dyn Error>> {
@@ -189,7 +189,7 @@ pub mod service_examples_tests {
                         use crate::service::service_legalios as legalios;
                         use crate::service::service_legalios::IServiceLegalios;
                         use crate::service::bundle_props::{IBundleProps};
-                        use crate::props::props_social_base::{IPropsSocial};
+                        use crate::factories::provider_factory::{BoxSocialProps};
                         $(
                             #[test]
                             fn $name() -> Result<(), Box<dyn Error>> {
@@ -267,7 +267,7 @@ pub mod service_examples_tests {
                         use crate::service::service_legalios as legalios;
                         use crate::service::service_legalios::IServiceLegalios;
                         use crate::service::bundle_props::{IBundleProps};
-                        use crate::props::props_taxing_base::{IPropsTaxing};
+                        use crate::factories::provider_factory::{BoxTaxingProps};
                         $(
                             #[test]
                             fn $name() -> Result<(), Box<dyn Error>> {

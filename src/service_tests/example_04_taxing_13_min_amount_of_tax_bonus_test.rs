@@ -7,13 +7,13 @@ mod service_tests {
         test_examples_report,
         taxing_13,
         "04_Taxing_13_MinAmountOfTaxBonus",
-        |x: &dyn IPropsTaxing| { x.min_amount_of_tax_bonus() },
+        |x: &BoxTaxingProps| { x.min_amount_of_tax_bonus() },
         2010,
         2022
     );
 
     #[macro_use(crate::test_examples_log_int_taxing)]
-    crate::test_examples_log_int_taxing! (test_log_examples_2010_2022, "04_Taxing_13_MinAmountOfTaxBonus", |x: &dyn IPropsTaxing| {x.min_amount_of_tax_bonus()},
+    crate::test_examples_log_int_taxing! (test_log_examples_2010_2022, "04_Taxing_13_MinAmountOfTaxBonus", |x: &BoxTaxingProps| {x.min_amount_of_tax_bonus()},
         test_examples_2010: 2010,
         [
             min_amount_of_tax_bonus_test_period_2010_01: 2010, 1, 2010, 1, 50,

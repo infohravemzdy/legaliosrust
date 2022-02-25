@@ -1,4 +1,5 @@
 use rust_decimal::Decimal;
+use crate::factories::provider_factory::{BoxHealthProps};
 use crate::props::particy_results::{ParticyHealthResult, ParticyHealthTarget};
 use crate::props::props::IProps;
 use crate::props::props_health_base::{IPropsHealth, PropsHealthBase};
@@ -100,7 +101,7 @@ impl IPropsHealth for PropsHealth {
 
     fn margin_income_agr(&self) -> i32 { self.props.margin_income_agr() }
 
-    fn value_equals(&self, other_health: &dyn IPropsHealth) -> bool {
+    fn value_equals(&self, other_health: &BoxHealthProps) -> bool {
         return self.props.value_equals(other_health);
     }
 

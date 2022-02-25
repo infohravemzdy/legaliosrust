@@ -7,13 +7,13 @@ mod service_tests {
         test_examples_report,
         salary_03,
         "02_Salary_03_MinMonthlyWage",
-        |x: &dyn IPropsSalary| { x.min_monthly_wage() },
+        |x: &BoxSalaryProps| { x.min_monthly_wage() },
         2010,
         2022
     );
 
     #[macro_use(crate::test_examples_log_int_salary)]
-    crate::test_examples_log_int_salary! (test_log_examples_2010_2022, "02_Salary_03_MinMonthlyWage", |x: &dyn IPropsSalary| {x.min_monthly_wage()},
+    crate::test_examples_log_int_salary! (test_log_examples_2010_2022, "02_Salary_03_MinMonthlyWage", |x: &BoxSalaryProps| {x.min_monthly_wage()},
         test_examples_2010: 2010,
         [
             min_monthly_wage_test_period_2010_01: 2010, 1, 2010, 1, 8000,

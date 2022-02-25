@@ -1,8 +1,9 @@
 ﻿use rust_decimal::Decimal;
+use crate::factories::provider_factory::BoxHealthProps;
 use crate::props::props_health_2012::PropsHealth2012;
 use crate::providers::history_const_health::HistoryConstHealth;
 use crate::providers::period_2013::history_const_health_2013::{HistoryConstHealth2013, HistoryConstHealth2013var08, HistoryConstHealth2013var11};
-use crate::providers::props_provider::IPropsProvider;
+use crate::providers::props_provider::{IPropsHealthProvider};
 use crate::service::period::IPeriod;
 use crate::service::version_id::VersionId;
 
@@ -56,12 +57,12 @@ impl ProviderHealth2013 {
     }
 }
 
-impl IPropsProvider<PropsHealth2012> for ProviderHealth2013 {
+impl IPropsHealthProvider for ProviderHealth2013 {
     fn get_version(&self) -> VersionId {
         self.version
     }
-    fn get_props(&self, _period: &dyn IPeriod) -> PropsHealth2012 {
-        PropsHealth2012::new(self.version,
+    fn get_props(&self, _period: &dyn IPeriod) -> BoxHealthProps {
+        Box::new(PropsHealth2012::new(self.version,
                          self.min_monthly_basis(_period),
                          self.max_annuals_basis(_period),
                          self.lim_monthly_state(_period),
@@ -69,6 +70,6 @@ impl IPropsProvider<PropsHealth2012> for ProviderHealth2013 {
                          self.factor_compound(_period),
                          self.factor_employee(_period),
                          self.margin_income_emp(_period),
-                         self.margin_income_agr(_period))
+                         self.margin_income_agr(_period)))
     }
 }

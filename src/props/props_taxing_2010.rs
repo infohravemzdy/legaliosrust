@@ -1,4 +1,5 @@
 use rust_decimal::Decimal;
+use crate::factories::provider_factory::BoxTaxingProps;
 use crate::props::props::IProps;
 use crate::props::props_taxing_base::{IPropsTaxing, PropsTaxingBase};
 use crate::service::contract_terms::WorkTaxingTerms;
@@ -158,7 +159,7 @@ impl IPropsTaxing for PropsTaxing2010 {
         self.props.margin_income_of_wth_agr()
     }
 
-    fn value_equals(&self, other_taxing: &dyn IPropsTaxing) -> bool {
+    fn value_equals(&self, other_taxing: &BoxTaxingProps) -> bool {
         return self.props.value_equals(other_taxing);
     }
 

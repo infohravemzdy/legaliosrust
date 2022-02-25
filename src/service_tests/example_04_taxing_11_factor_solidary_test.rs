@@ -7,13 +7,13 @@ mod service_tests {
         test_examples_report,
         taxing_11,
         "04_Taxing_11_FactorSolidary",
-        |x: &dyn IPropsTaxing| { x.factor_solidary() },
+        |x: &BoxTaxingProps| { x.factor_solidary() },
         2010,
         2022
     );
 
     #[macro_use(crate::test_examples_log_dec_taxing)]
-    crate::test_examples_log_dec_taxing! (test_log_examples_2010_2022, "04_Taxing_11_FactorSolidary", |x: &dyn IPropsTaxing| {x.factor_solidary()},
+    crate::test_examples_log_dec_taxing! (test_log_examples_2010_2022, "04_Taxing_11_FactorSolidary", |x: &BoxTaxingProps| {x.factor_solidary()},
         test_examples_2010: 2010,
         [
             factor_solidary_test_period_2010_01: 2010, 1, 2010, 1, "0",

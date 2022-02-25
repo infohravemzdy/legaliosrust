@@ -1,4 +1,5 @@
 use rust_decimal::Decimal;
+use crate::factories::provider_factory::BoxSocialProps;
 use crate::props::particy_results::{ParticySocialResult, ParticySocialTarget};
 use crate::props::props::IProps;
 use crate::props::props_social_base::{IPropsSocial, PropsSocialBase};
@@ -103,7 +104,7 @@ impl IPropsSocial for PropsSocial2010 {
         self.props.margin_income_agr()
     }
 
-    fn value_equals(&self, other_social: &dyn IPropsSocial) -> bool {
+    fn value_equals(&self, other_social: &BoxSocialProps) -> bool {
         return self.props.value_equals(other_social);
     }
 

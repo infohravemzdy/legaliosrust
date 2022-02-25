@@ -1,9 +1,10 @@
 ﻿use rust_decimal::Decimal;
+use crate::factories::provider_factory::BoxTaxingProps;
 use crate::props::props::IProps;
 use crate::props::props_taxing_2018::PropsTaxing2018;
 use crate::providers::history_const_taxing::HistoryConstTaxing;
 use crate::providers::period_2019::history_const_taxing_2019::{HistoryConstTaxing2019, HistoryConstTaxing2019var05};
-use crate::providers::props_provider::IPropsProvider;
+use crate::providers::props_provider::{IPropsTaxingProvider};
 use crate::service::period::IPeriod;
 use crate::service::version_id::VersionId;
 
@@ -112,12 +113,12 @@ impl IProps for ProviderTaxing2019 {
     }
 }
 
-impl IPropsProvider<PropsTaxing2018> for ProviderTaxing2019 {
+impl IPropsTaxingProvider for ProviderTaxing2019 {
     fn get_version(&self) -> VersionId {
         self.version
     }
-    fn get_props(&self, _period: &dyn IPeriod) -> PropsTaxing2018 {
-        PropsTaxing2018::new(self.version,
+    fn get_props(&self, _period: &dyn IPeriod) -> BoxTaxingProps {
+        Box::new(PropsTaxing2018::new(self.version,
                          self.allowance_payer(_period),
                          self.allowance_disab1st(_period),
                          self.allowance_disab2nd(_period),
@@ -138,6 +139,6 @@ impl IPropsProvider<PropsTaxing2018> for ProviderTaxing2019 {
                          self.margin_income_of_solidary(_period),
                          self.margin_income_of_taxrate2(_period),
                          self.margin_income_of_wth_emp(_period),
-                         self.margin_income_of_wth_agr(_period))
+                         self.margin_income_of_wth_agr(_period)))
     }
 }

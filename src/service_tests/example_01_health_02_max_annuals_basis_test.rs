@@ -7,13 +7,13 @@ mod service_tests {
         test_examples_report,
         health_02,
         "",
-        |x: &dyn IPropsHealth| { x.max_annuals_basis() },
+        |x: &BoxHealthProps| { x.max_annuals_basis() },
         2010,
         2022
     );
 
     #[macro_use(crate::test_examples_log_int_health)]
-    crate::test_examples_log_int_health! (test_log_examples_2010_2022, "01_Health_02_MaxAnnualsBasis", |x: &dyn IPropsHealth| {x.max_annuals_basis()},
+    crate::test_examples_log_int_health! (test_log_examples_2010_2022, "01_Health_02_MaxAnnualsBasis", |x: &BoxHealthProps| {x.max_annuals_basis()},
         test_examples_2010: 2010,
         [
             max_annuals_basis_test_period_2010_01: 2010, 1, 2010, 1, 1707048,

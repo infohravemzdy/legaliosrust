@@ -7,13 +7,13 @@ mod service_tests {
         test_examples_report,
         taxing_09,
         "04_Taxing_09_FactorAdvances",
-        |x: &dyn IPropsTaxing| { x.factor_advances() },
+        |x: &BoxTaxingProps| { x.factor_advances() },
         2010,
         2022
     );
 
     #[macro_use(crate::test_examples_log_dec_taxing)]
-    crate::test_examples_log_dec_taxing! (test_log_examples_2010_2022, "04_Taxing_09_FactorAdvances", |x: &dyn IPropsTaxing| {x.factor_advances()},
+    crate::test_examples_log_dec_taxing! (test_log_examples_2010_2022, "04_Taxing_09_FactorAdvances", |x: &BoxTaxingProps| {x.factor_advances()},
         test_examples_2010: 2010,
         [
             factor_advances_test_period_2010_01: 2010, 1, 2010, 1, "15",

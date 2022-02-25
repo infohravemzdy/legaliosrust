@@ -7,13 +7,13 @@ mod service_tests {
         test_examples_report,
         social_05,
         "03_Social_05_FactorEmployeeGarant",
-        |x: &dyn IPropsSocial| { x.factor_employee_garant() },
+        |x: &BoxSocialProps| { x.factor_employee_garant() },
         2010,
         2022
     );
 
     #[macro_use(crate::test_examples_log_dec_social)]
-    crate::test_examples_log_dec_social! (test_log_examples_2010_2022, "03_Social_05_FactorEmployeeGarant", |x: &dyn IPropsSocial| {x.factor_employee_garant()},
+    crate::test_examples_log_dec_social! (test_log_examples_2010_2022, "03_Social_05_FactorEmployeeGarant", |x: &BoxSocialProps| {x.factor_employee_garant()},
         test_examples_2010: 2010,
         [
             factor_employee_garant_test_period_2010_01: 2010, 1, 2010, 1, "0",

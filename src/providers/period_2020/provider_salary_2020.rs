@@ -1,8 +1,9 @@
-﻿use crate::props::props::IProps;
+﻿use crate::factories::provider_factory::BoxSalaryProps;
+use crate::props::props::IProps;
 use crate::props::props_salary::PropsSalary;
 use crate::providers::history_const_salary::HistoryConstSalary;
 use crate::providers::period_2020::history_const_salary_2020::HistoryConstSalary2020;
-use crate::providers::props_provider::IPropsProvider;
+use crate::providers::props_provider::{IPropsSalaryProvider};
 use crate::service::period::IPeriod;
 use crate::service::version_id::VersionId;
 
@@ -38,16 +39,16 @@ impl IProps for ProviderSalary2020 {
     }
 }
 
-impl IPropsProvider<PropsSalary> for ProviderSalary2020 {
+impl IPropsSalaryProvider for ProviderSalary2020 {
     fn get_version(&self) -> VersionId {
         self.version
     }
-    fn get_props(&self, _period: &dyn IPeriod) -> PropsSalary {
-        PropsSalary::new(self.version,
+    fn get_props(&self, _period: &dyn IPeriod) -> BoxSalaryProps {
+        Box::new(PropsSalary::new(self.version,
                          self.working_shift_week(_period),
                          self.working_shift_time(_period),
                          self.min_monthly_wage(_period),
-                         self.min_hourly_wage(_period))
+                         self.min_hourly_wage(_period)))
     }
 }
 

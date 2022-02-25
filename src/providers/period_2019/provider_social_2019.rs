@@ -1,9 +1,10 @@
 ﻿use rust_decimal::Decimal;
+use crate::factories::provider_factory::BoxSocialProps;
 use crate::props::props::IProps;
 use crate::props::props_social::PropsSocial;
 use crate::providers::history_const_social::HistoryConstSocial;
 use crate::providers::period_2019::history_const_social_2019::{HistoryConstSocial2019, HistoryConstSocial2019var07};
-use crate::providers::props_provider::IPropsProvider;
+use crate::providers::props_provider::{IPropsSocialProvider};
 use crate::service::period::IPeriod;
 use crate::service::version_id::VersionId;
 
@@ -60,12 +61,12 @@ impl IProps for ProviderSocial2019 {
     }
 }
 
-impl IPropsProvider<PropsSocial> for ProviderSocial2019 {
+impl IPropsSocialProvider for ProviderSocial2019 {
     fn get_version(&self) -> VersionId {
         self.version
     }
-    fn get_props(&self, _period: &dyn IPeriod) -> PropsSocial {
-        PropsSocial::new(self.version,
+    fn get_props(&self, _period: &dyn IPeriod) -> BoxSocialProps {
+        Box::new(PropsSocial::new(self.version,
                          self.max_annuals_basis(_period),
                          self.factor_employer(_period),
                          self.factor_employer_higher(_period),
@@ -73,6 +74,6 @@ impl IPropsProvider<PropsSocial> for ProviderSocial2019 {
                          self.factor_employee_garant(_period),
                          self.factor_employee_reduce(_period),
                          self.margin_income_emp(_period),
-                         self.margin_income_agr(_period))
+                         self.margin_income_agr(_period)))
     }
 }

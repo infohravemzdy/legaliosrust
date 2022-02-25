@@ -7,13 +7,13 @@ mod service_tests {
         test_examples_report,
         health_07,
         "01_Health_07_MarginIncomeEmp",
-        |x: &dyn IPropsHealth| { x.margin_income_emp() },
+        |x: &BoxHealthProps| { x.margin_income_emp() },
         2010,
         2022
     );
 
     #[macro_use(crate::test_examples_log_int_health)]
-    crate::test_examples_log_int_health! (test_log_examples_2010_2022, "01_Health_07_MarginIncomeEmp", |x: &dyn IPropsHealth| {x.margin_income_emp()},
+    crate::test_examples_log_int_health! (test_log_examples_2010_2022, "01_Health_07_MarginIncomeEmp", |x: &BoxHealthProps| {x.margin_income_emp()},
         test_examples_2010: 2010,
         [
             margin_income_emp_test_period_2010_01: 2010, 1, 2010, 1, 2000,

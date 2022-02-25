@@ -7,13 +7,13 @@ mod service_tests {
         test_examples_report,
         salary_01,
         "",
-        |x: &dyn IPropsSalary| { x.working_shift_week() },
+        |x: &BoxSalaryProps| { x.working_shift_week() },
         2010,
         2022
     );
 
     #[macro_use(crate::test_examples_log_int_salary)]
-    crate::test_examples_log_int_salary! (test_log_examples_2010_2022, "02_Salary_01_WorkingShiftWeek", |x: &dyn IPropsSalary| { x.working_shift_week() },
+    crate::test_examples_log_int_salary! (test_log_examples_2010_2022, "02_Salary_01_WorkingShiftWeek", |x: &BoxSalaryProps| { x.working_shift_week() },
         test_examples_2010: 2010,
         [
             working_shift_week_test_period_2010_01: 2010, 1, 2010, 1, 5,

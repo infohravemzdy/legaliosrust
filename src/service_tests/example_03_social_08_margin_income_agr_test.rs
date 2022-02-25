@@ -7,13 +7,13 @@ mod service_tests {
         test_examples_report,
         social_08,
         "03_Social_08_MarginIncomeAgr",
-        |x: &dyn IPropsSocial| { x.margin_income_agr() },
+        |x: &BoxSocialProps| { x.margin_income_agr() },
         2010,
         2022
     );
 
     #[macro_use(crate::test_examples_log_int_social)]
-    crate::test_examples_log_int_social! (test_log_examples_2010_2022, "03_Social_08_MarginIncomeAgr", |x: &dyn IPropsSocial| {x.margin_income_agr()},
+    crate::test_examples_log_int_social! (test_log_examples_2010_2022, "03_Social_08_MarginIncomeAgr", |x: &BoxSocialProps| {x.margin_income_agr()},
         test_examples_2010: 2010,
         [
             margin_income_agr_test_period_2010_01: 2010, 1, 2010, 1, 0,

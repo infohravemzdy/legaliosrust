@@ -1,9 +1,10 @@
 use rust_decimal::Decimal;
+use crate::factories::provider_factory::BoxTaxingProps;
 use crate::props::props::IProps;
 use crate::props::props_taxing_2010::PropsTaxing2010;
 use crate::providers::history_const_taxing::HistoryConstTaxing;
 use crate::providers::period_2011::history_const_taxing_2011::HistoryConstTaxing2011;
-use crate::providers::props_provider::IPropsProvider;
+use crate::providers::props_provider::{IPropsTaxingProvider};
 use crate::service::period::IPeriod;
 use crate::service::version_id::VersionId;
 
@@ -109,12 +110,12 @@ impl IProps for ProviderTaxing2011 {
     }
 }
 
-impl IPropsProvider<PropsTaxing2010> for ProviderTaxing2011 {
+impl IPropsTaxingProvider for ProviderTaxing2011 {
     fn get_version(&self) -> VersionId {
         self.version
     }
-    fn get_props(&self, _period: &dyn IPeriod) -> PropsTaxing2010 {
-        PropsTaxing2010::new(self.version,
+    fn get_props(&self, _period: &dyn IPeriod) -> BoxTaxingProps {
+        Box::new(PropsTaxing2010::new(self.version,
                          self.allowance_payer(_period),
                          self.allowance_disab1st(_period),
                          self.allowance_disab2nd(_period),
@@ -135,6 +136,6 @@ impl IPropsProvider<PropsTaxing2010> for ProviderTaxing2011 {
                          self.margin_income_of_solidary(_period),
                          self.margin_income_of_taxrate2(_period),
                          self.margin_income_of_wth_emp(_period),
-                         self.margin_income_of_wth_agr(_period))
+                         self.margin_income_of_wth_agr(_period)))
     }
 }

@@ -1,3 +1,4 @@
+use crate::factories::provider_factory::{BoxHealthProps, BoxSalaryProps, BoxSocialProps, BoxTaxingProps};
 use crate::props::props_health::PropsHealth;
 use crate::service::period::{IPeriod, Period};
 use crate::props::props_salary::PropsSalary;
@@ -6,10 +7,10 @@ use crate::props::props_taxing::PropsTaxing;
 
 pub trait IBundleProps {
     fn period_props(&self) -> Period;
-    fn salary_props(&self) -> PropsSalary;
-    fn health_props(&self) -> PropsHealth;
-    fn social_props(&self) -> PropsSocial;
-    fn taxing_props(&self) -> PropsTaxing;
+    fn salary_props(&self) -> &BoxSalaryProps;
+    fn health_props(&self) -> &BoxHealthProps;
+    fn social_props(&self) -> &BoxSocialProps;
+    fn taxing_props(&self) -> &BoxTaxingProps;
 
     fn get_period_year(&self) -> i16;
     fn get_period_month(&self) -> i16;
@@ -18,14 +19,14 @@ pub trait IBundleProps {
 
 pub struct BundleProps {
     period_props: Period,
-    salary_props: PropsSalary,
-    health_props: PropsHealth,
-    social_props: PropsSocial,
-    taxing_props: PropsTaxing,
+    salary_props: BoxSalaryProps,
+    health_props: BoxHealthProps,
+    social_props: BoxSocialProps,
+    taxing_props: BoxTaxingProps,
 }
 
 impl BundleProps {
-    pub(crate) fn new(period: &dyn IPeriod, salary: PropsSalary, health: PropsHealth, social: PropsSocial, taxing: PropsTaxing) -> BundleProps {
+    pub(crate) fn new(period: &dyn IPeriod, salary: BoxSalaryProps, health: BoxHealthProps, social: BoxSocialProps, taxing: BoxTaxingProps) -> BundleProps {
         BundleProps {
             period_props: Period::get(period.get_code()),
             salary_props: salary,
@@ -37,10 +38,10 @@ impl BundleProps {
     pub fn empty(period: &dyn IPeriod) -> BundleProps {
         BundleProps {
             period_props: Period::get(period.get_code()),
-            salary_props: PropsSalary::empty(),
-            health_props: PropsHealth::empty(),
-            social_props: PropsSocial::empty(),
-            taxing_props: PropsTaxing::empty(),
+            salary_props: Box::new(PropsSalary::empty()),
+            health_props: Box::new(PropsHealth::empty()),
+            social_props: Box::new(PropsSocial::empty()),
+            taxing_props: Box::new(PropsTaxing::empty()),
         }
     }
 }
@@ -49,17 +50,17 @@ impl IBundleProps for BundleProps {
     fn period_props(&self) -> Period {
         self.period_props
     }
-    fn salary_props(&self) -> PropsSalary {
-        self.salary_props
+    fn salary_props(&self) -> &BoxSalaryProps {
+        &self.salary_props
     }
-    fn health_props(&self) -> PropsHealth {
-        self.health_props
+    fn health_props(&self) -> &BoxHealthProps {
+        &self.health_props
     }
-    fn social_props(&self) -> PropsSocial {
-        self.social_props
+    fn social_props(&self) -> &BoxSocialProps {
+        &self.social_props
     }
-    fn taxing_props(&self) -> PropsTaxing {
-        self.taxing_props
+    fn taxing_props(&self) -> &BoxTaxingProps {
+        &self.taxing_props
     }
     fn get_period_year(&self) -> i16 {
         self.period_props.year()

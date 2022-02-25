@@ -1,6 +1,7 @@
 use std::cmp::max;
 use rust_decimal::Decimal;
 use rust_decimal::prelude::FromPrimitive;
+use crate::factories::provider_factory::BoxHealthProps;
 use crate::props::particy_results::{ParticyHealthResult, ParticyHealthTarget};
 use crate::props::props::IProps;
 use crate::service::contract_terms::WorkHealthTerms;
@@ -17,7 +18,7 @@ pub trait IPropsHealth : IProps {
     fn margin_income_emp(&self) -> i32;
     fn margin_income_agr(&self) -> i32;
 
-    fn value_equals(&self, other_health: &dyn IPropsHealth) ->  bool;
+    fn value_equals(&self, other_health: &BoxHealthProps) ->  bool;
     fn has_particy(&self, term: &WorkHealthTerms, income_term: i32, income_spec: i32) ->  bool;
     fn rounded_compound_paym(&self, basis_result: i32) ->  i32;
     fn rounded_employee_paym(&self, basis_result: i32) ->  i32;
@@ -163,7 +164,7 @@ impl IPropsHealth for PropsHealthBase {
         self.margin_income_agr
     }
 
-    fn value_equals(&self, other_health: &dyn IPropsHealth) -> bool {
+    fn value_equals(&self, other_health: &BoxHealthProps) -> bool {
          return self.min_monthly_basis == other_health.min_monthly_basis() &&
             self.max_annuals_basis == other_health.max_annuals_basis() &&
             self.lim_monthly_state == other_health.lim_monthly_state() &&

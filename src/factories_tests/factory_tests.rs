@@ -6,8 +6,7 @@ mod factories_tests {
             mod $suite {
                 use std::error::Error;
 
-                use crate::factories::provider_factory::{IProviderFactory, salary_factory};
-                use crate::props::props::IProps;
+                use crate::factories::provider_factory::{IProviderSalaryFactory, salary_factory};
                 use crate::service::period;
 
                 $(
@@ -30,8 +29,7 @@ mod factories_tests {
             mod $suite {
                 use std::error::Error;
 
-                use crate::factories::provider_factory::{IProviderFactory, health_factory};
-                use crate::props::props::IProps;
+                use crate::factories::provider_factory::{IProviderHealthFactory, health_factory};
                 use crate::service::period;
 
                 $(
@@ -54,8 +52,7 @@ mod factories_tests {
             mod $suite {
                 use std::error::Error;
 
-                use crate::factories::provider_factory::{IProviderFactory, social_factory};
-                use crate::props::props::IProps;
+                use crate::factories::provider_factory::{IProviderSocialFactory, social_factory};
                 use crate::service::period;
 
                 $(
@@ -78,8 +75,7 @@ mod factories_tests {
             mod $suite {
                 use std::error::Error;
 
-                use crate::factories::provider_factory::{IProviderFactory, taxing_factory};
-                use crate::props::props::IProps;
+                use crate::factories::provider_factory::{IProviderTaxingFactory, taxing_factory};
                 use crate::service::period;
 
                 $(

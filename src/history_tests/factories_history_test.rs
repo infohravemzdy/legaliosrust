@@ -3,11 +3,7 @@
 //#[cfg(test_report)]
 mod factories_history_tests {
     use std::error::Error;
-    use crate::factories::provider_factory::{health_factory, salary_factory, social_factory, taxing_factory, IProviderFactory, ProviderHealthFactory, ProviderSalaryFactory, ProviderSocialFactory, ProviderTaxingFactory};
-    use crate::props::props_health_base::IPropsHealth;
-    use crate::props::props_salary::IPropsSalary;
-    use crate::props::props_social_base::IPropsSocial;
-    use crate::props::props_taxing_base::IPropsTaxing;
+    use crate::factories::provider_factory::{health_factory, salary_factory, social_factory, taxing_factory, ProviderHealthFactory, ProviderSalaryFactory, ProviderSocialFactory, ProviderTaxingFactory, IProviderSalaryFactory, IProviderHealthFactory, IProviderSocialFactory, IProviderTaxingFactory};
     use crate::service::period;
     use crate::service::period::{IPeriod};
     use crate::history_tests::service_report_history_tests::factories_history_tests::create_history_file;

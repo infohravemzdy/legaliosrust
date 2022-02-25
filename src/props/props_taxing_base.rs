@@ -2,6 +2,7 @@ use std::cmp::{max, min};
 use std::ops::Neg;
 use rust_decimal::Decimal;
 use rust_decimal::prelude::FromPrimitive;
+use crate::factories::provider_factory::BoxTaxingProps;
 use crate::props::props::IProps;
 use crate::service::contract_terms::WorkTaxingTerms;
 use crate::service::taxing_options::{TaxDeclBenfOption, TaxDeclDisabOption, TaxDeclSignOption, TaxNoneSignOption};
@@ -31,7 +32,7 @@ pub trait IPropsTaxing : IProps {
     fn margin_income_of_wth_emp(&self) -> i32;
     fn margin_income_of_wth_agr(&self) -> i32;
 
-    fn value_equals(&self, other_taxing: &dyn IPropsTaxing) -> bool;
+    fn value_equals(&self, other_taxing: &BoxTaxingProps) -> bool;
     fn has_withhold_income(&self, _term_opt: WorkTaxingTerms, _sgn_opt: TaxDeclSignOption, _none_opt: TaxNoneSignOption, _income_sum: i32) -> bool { false }
     fn benefit_allowance_payer(&self, sign_opts: TaxDeclSignOption, benefit_opts: TaxDeclBenfOption) -> i32;
     fn benefit_allowance_disab(&self, sign_opts: TaxDeclSignOption, benefit_opts: TaxDeclDisabOption) -> i32;
@@ -280,7 +281,7 @@ impl IPropsTaxing for PropsTaxingBase {
         self.margin_income_of_wth_agr
     }
 
-    fn value_equals(&self, other_taxing: &dyn IPropsTaxing) -> bool {
+    fn value_equals(&self, other_taxing: &BoxTaxingProps) -> bool {
         return self.allowance_payer == other_taxing.allowance_payer() &&
             self.allowance_disab1st == other_taxing.allowance_disab1st() &&
             self.allowance_disab2nd == other_taxing.allowance_disab2nd() &&

@@ -7,13 +7,13 @@ mod service_tests {
         test_examples_report,
         health_05,
         "01_Health_05_FactorCompound",
-        |x: &dyn IPropsHealth| { x.factor_compound() },
+        |x: &BoxHealthProps| { x.factor_compound() },
         2010,
         2022
     );
 
     #[macro_use(crate::test_examples_log_dec_health)]
-    crate::test_examples_log_dec_health! (test_log_examples_2010_2022, "01_Health_05_FactorCompound", |x: &dyn IPropsHealth| {x.factor_compound()},
+    crate::test_examples_log_dec_health! (test_log_examples_2010_2022, "01_Health_05_FactorCompound", |x: &BoxHealthProps| {x.factor_compound()},
         test_examples_2010: 2010,
         [
             factor_compound_test_period_2010_01: 2010, 1, 2010, 1, "13.5",

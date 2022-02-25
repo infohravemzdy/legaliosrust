@@ -1,10 +1,5 @@
 use crate::service::bundle_props::{BundleProps};
-use crate::factories::provider_factory::{salary_factory, health_factory, social_factory, taxing_factory, IProviderFactory, ProviderSalaryFactory, ProviderHealthFactory, ProviderSocialFactory, ProviderTaxingFactory};
-use crate::props::props::IProps;
-use crate::props::props_health::{PropsHealth};
-use crate::props::props_salary::{PropsSalary};
-use crate::props::props_social::PropsSocial;
-use crate::props::props_taxing::{PropsTaxing};
+use crate::factories::provider_factory::{salary_factory, health_factory, social_factory, taxing_factory, ProviderSalaryFactory, ProviderHealthFactory, ProviderSocialFactory, ProviderTaxingFactory, BoxSalaryProps, BoxHealthProps, BoxSocialProps, BoxTaxingProps, IProviderSalaryFactory, IProviderHealthFactory, IProviderSocialFactory, IProviderTaxingFactory};
 use crate::service::period::IPeriod;
 
 pub(crate) trait  IBundleBuilder {
@@ -29,37 +24,52 @@ impl BundleBuilder {
         }
     }
 
-    fn get_salary_props(&self, _period: &dyn IPeriod) -> PropsSalary {
+    fn get_salary_props(&self, _period: &dyn IPeriod) -> BoxSalaryProps {
         self.salary_factory.get_props(_period)
     }
 
-    fn get_health_props(&self, _period: &dyn IPeriod) -> PropsHealth {
+    fn get_health_props(&self, _period: &dyn IPeriod) -> BoxHealthProps {
         self.health_factory.get_props(_period)
     }
 
-    fn get_social_props(&self, _period: &dyn IPeriod) -> PropsSocial {
+    fn get_social_props(&self, _period: &dyn IPeriod) -> BoxSocialProps {
         self.social_factory.get_props(_period)
     }
 
-    fn get_taxing_props(&self, _period: &dyn IPeriod) -> PropsTaxing {
+    fn get_taxing_props(&self, _period: &dyn IPeriod) -> BoxTaxingProps {
         self.taxing_factory.get_props(_period)
     }
-    fn is_null_or_empty(props: &dyn IProps) -> bool {
+    fn is_salary_null_or_empty(props: &BoxSalaryProps) -> bool {
         const MIN_VERSION: i16 = 2010;
         let version = props.get_version().value;
         version == 0 || version < MIN_VERSION
      }
-    fn is_valid_bundle(salary: &dyn IProps, health: &dyn IProps, social: &dyn IProps, taxing: &dyn IProps) -> bool {
-        if BundleBuilder::is_null_or_empty(salary) {
+    fn is_health_null_or_empty(props: &BoxHealthProps) -> bool {
+        const MIN_VERSION: i16 = 2010;
+        let version = props.get_version().value;
+        version == 0 || version < MIN_VERSION
+    }
+    fn is_social_null_or_empty(props: &BoxSocialProps) -> bool {
+        const MIN_VERSION: i16 = 2010;
+        let version = props.get_version().value;
+        version == 0 || version < MIN_VERSION
+    }
+    fn is_taxing_null_or_empty(props: &BoxTaxingProps) -> bool {
+        const MIN_VERSION: i16 = 2010;
+        let version = props.get_version().value;
+        version == 0 || version < MIN_VERSION
+    }
+    fn is_valid_bundle(salary: &BoxSalaryProps, health: &BoxHealthProps, social: &BoxSocialProps, taxing: &BoxTaxingProps) -> bool {
+        if BundleBuilder::is_salary_null_or_empty(salary) {
              return false;
         }
-        if BundleBuilder::is_null_or_empty(health) {
+        if BundleBuilder::is_health_null_or_empty(health) {
             return false;
         }
-        if BundleBuilder::is_null_or_empty(social) {
+        if BundleBuilder::is_social_null_or_empty(social) {
             return false;
         }
-        if BundleBuilder::is_null_or_empty(taxing) {
+        if BundleBuilder::is_taxing_null_or_empty(taxing) {
             return false;
         }
         true

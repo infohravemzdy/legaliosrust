@@ -7,13 +7,13 @@ mod service_tests {
         test_examples_report,
         taxing_18,
         "04_Taxing_18_MarginIncomeOfSolidary",
-        |x: &dyn IPropsTaxing| { x.margin_income_of_solidary() },
+        |x: &BoxTaxingProps| { x.margin_income_of_solidary() },
         2010,
         2022
     );
 
     #[macro_use(crate::test_examples_log_int_taxing)]
-    crate::test_examples_log_int_taxing! (test_log_examples_2010_2022, "04_Taxing_18_MarginIncomeOfSolidary", |x: &dyn IPropsTaxing| {x.margin_income_of_solidary()},
+    crate::test_examples_log_int_taxing! (test_log_examples_2010_2022, "04_Taxing_18_MarginIncomeOfSolidary", |x: &BoxTaxingProps| {x.margin_income_of_solidary()},
         test_examples_2010: 2010,
         [
             margin_income_of_solidary_test_period_2010_01: 2010, 1, 2010, 1, 0,

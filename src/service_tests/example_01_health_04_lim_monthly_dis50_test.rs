@@ -7,13 +7,13 @@ mod service_tests {
         test_examples_report,
         health_04,
         "01_Health_04_LimMonthlyDis50",
-        |x: &dyn IPropsHealth| { x.lim_monthly_dis50() },
+        |x: &BoxHealthProps| { x.lim_monthly_dis50() },
         2010,
         2022
     );
 
     #[macro_use(crate::test_examples_log_int_health)]
-    crate::test_examples_log_int_health! (test_log_examples_2010_2022, "01_Health_04_LimMonthlyDis50", |x: &dyn IPropsHealth| {x.lim_monthly_dis50()},
+    crate::test_examples_log_int_health! (test_log_examples_2010_2022, "01_Health_04_LimMonthlyDis50", |x: &BoxHealthProps| {x.lim_monthly_dis50()},
         test_examples_2010: 2010,
         [
             lim_monthly_dis50_test_period_2010_01: 2010, 1, 2010, 1, 5355,

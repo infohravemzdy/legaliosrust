@@ -1,6 +1,7 @@
 use std::cmp::{max, min};
 use rust_decimal::Decimal;
 use rust_decimal::prelude::FromPrimitive;
+use crate::factories::provider_factory::BoxSalaryProps;
 use crate::props::props::IProps;
 use crate::service::operations_dec;
 use crate::service::operations_round;
@@ -12,7 +13,7 @@ pub trait IPropsSalary : IProps {
     fn min_monthly_wage(&self) -> i32;
     fn min_hourly_wage(&self) -> i32;
 
-    fn value_equals(&self, other_salary: &dyn IPropsSalary) -> bool;
+    fn value_equals(&self, other_salary: &BoxSalaryProps) -> bool;
     fn coeff_with_part_and_full_hours(&self, full_work_hours: Decimal, part_work_hours: Decimal) ->  Decimal;
     fn payment_with_monthly_and_full_week_and_full_and_work_hours(&self, amount_monthly: Decimal,
                                                                   full_week_hours: i32, part_week_hours: i32,
@@ -158,7 +159,7 @@ impl IPropsSalary for PropsSalary {
         self.min_hourly_wage
     }
 
-    fn value_equals(&self, other_salary: &dyn IPropsSalary) -> bool {
+    fn value_equals(&self, other_salary: &BoxSalaryProps) -> bool {
         return self.working_shift_week == other_salary.working_shift_week() &&
             self.working_shift_time == other_salary.working_shift_time() &&
             self.min_monthly_wage == other_salary.min_monthly_wage() &&

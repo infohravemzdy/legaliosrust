@@ -10,7 +10,7 @@ pub mod service_examples_tests {
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
                 use crate::service::bundle_props::{IBundleProps};
-                use crate::props::props_salary::{IPropsSalary};
+                use crate::factories::provider_factory::{BoxSalaryProps};
 
                 use crate::service_tests::service_report_examples_tests::service_examples_tests::{close_report_file, create_report_file, write_report_head, write_report_year_ends, write_report_year_head, write_report_year_int_value};
                 #[test]
@@ -72,7 +72,7 @@ pub mod service_examples_tests {
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
                 use crate::service::bundle_props::{IBundleProps};
-                use crate::props::props_health_base::{IPropsHealth};
+                use crate::factories::provider_factory::{BoxHealthProps};
 
                 use crate::service_tests::service_report_examples_tests::service_examples_tests::{close_report_file, create_report_file, write_report_head, write_report_year_ends, write_report_year_head, write_report_year_int_value};
                 #[test]
@@ -134,7 +134,7 @@ pub mod service_examples_tests {
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
                 use crate::service::bundle_props::{IBundleProps};
-                use crate::props::props_social_base::{IPropsSocial};
+                use crate::factories::provider_factory::{BoxSocialProps};
 
                 use crate::service_tests::service_report_examples_tests::service_examples_tests::{close_report_file, create_report_file, write_report_head, write_report_year_ends, write_report_year_head, write_report_year_int_value};
                 #[test]
@@ -196,7 +196,7 @@ pub mod service_examples_tests {
                 use crate::service::service_legalios as legalios;
                 use crate::service::service_legalios::IServiceLegalios;
                 use crate::service::bundle_props::{IBundleProps};
-                use crate::props::props_taxing_base::{IPropsTaxing};
+                use crate::factories::provider_factory::{BoxTaxingProps};
 
                 use crate::service_tests::service_report_examples_tests::service_examples_tests::{close_report_file, create_report_file, write_report_head, write_report_year_ends, write_report_year_head, write_report_year_int_value};
                 #[test]

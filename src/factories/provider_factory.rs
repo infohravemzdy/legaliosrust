@@ -1,10 +1,11 @@
 use std::collections::HashMap;
 use crate::props::props_health::{PropsHealth};
-use crate::props::props_salary::{PropsSalary};
+use crate::props::props_salary::{IPropsSalary, PropsSalary};
 use crate::props::props_social::PropsSocial;
 use crate::props::props_taxing::{PropsTaxing};
-use crate::props::props::IProps;
 use crate::props::props_health_base::IPropsHealth;
+use crate::props::props_social_base::IPropsSocial;
+use crate::props::props_taxing_base::IPropsTaxing;
 use crate::providers::period_2010::provider_health_2010::ProviderHealth2010;
 use crate::providers::period_2010::provider_salary_2010::ProviderSalary2010;
 use crate::providers::period_2010::provider_social_2010::ProviderSocial2010;
@@ -57,19 +58,36 @@ use crate::providers::period_2022::provider_health_2022::ProviderHealth2022;
 use crate::providers::period_2022::provider_salary_2022::ProviderSalary2022;
 use crate::providers::period_2022::provider_social_2022::ProviderSocial2022;
 use crate::providers::period_2022::provider_taxing_2022::ProviderTaxing2022;
-use crate::providers::props_provider::IPropsProvider;
+use crate::providers::props_provider::{IPropsHealthProvider, IPropsSalaryProvider, IPropsSocialProvider, IPropsTaxingProvider};
 use crate::service::period::IPeriod;
 
-pub(crate) trait IProviderFactory<PR: IProps> {
-    fn get_props(&self, _period: &dyn IPeriod) -> PR;
+pub(crate) trait IProviderSalaryFactory {
+    fn get_props(&self, _period: &dyn IPeriod) -> BoxSalaryProps;
+}
+
+pub(crate) trait IProviderHealthFactory {
+    fn get_props(&self, _period: &dyn IPeriod) -> BoxHealthProps;
+}
+
+pub(crate) trait IProviderSocialFactory {
+    fn get_props(&self, _period: &dyn IPeriod) -> BoxSocialProps;
+}
+
+pub(crate) trait IProviderTaxingFactory {
+    fn get_props(&self, _period: &dyn IPeriod) -> BoxTaxingProps;
 }
 
 type VERSION = i16;
 
-type BoxSalaryProvider = Box<dyn IPropsProvider<PropsSalary>>;
-type BoxHealthProvider = Box<dyn IPropsProvider<PropsHealth>>;
-type BoxSocialProvider = Box<dyn IPropsProvider<PropsSocial>>;
-type BoxTaxingProvider = Box<dyn IPropsProvider<PropsTaxing>>;
+type BoxSalaryProvider = Box<dyn IPropsSalaryProvider>;
+type BoxHealthProvider = Box<dyn IPropsHealthProvider>;
+type BoxSocialProvider = Box<dyn IPropsSocialProvider>;
+type BoxTaxingProvider = Box<dyn IPropsTaxingProvider>;
+
+pub(crate) type BoxSalaryProps = Box<dyn IPropsSalary>;
+pub(crate) type BoxHealthProps = Box<dyn IPropsHealth>;
+pub(crate) type BoxSocialProps = Box<dyn IPropsSocial>;
+pub(crate) type BoxTaxingProps = Box<dyn IPropsTaxing>;
 
 pub(crate) struct ProviderSalaryFactory {
     default_provider: BoxSalaryProvider,
@@ -218,12 +236,12 @@ impl ProviderSalaryFactory {
     }
 }
 
-impl IProviderFactory<PropsSalary> for ProviderSalaryFactory {
-    fn get_props(&self, _period: &dyn IPeriod) -> PropsSalary {
+impl IProviderSalaryFactory for ProviderSalaryFactory {
+    fn get_props(&self, _period: &dyn IPeriod) -> BoxSalaryProps {
         let option_provider = self.get_provider(_period, &self.default_provider);
         match option_provider {
             Some(provider) => provider.get_props(_period),
-            None => self.empty_period_props,
+            None => Box::new(self.empty_period_props),
         }
     }
 }
@@ -255,12 +273,12 @@ impl ProviderHealthFactory {
     }
 }
 
-impl IProviderFactory<PropsHealth> for ProviderHealthFactory {
-    fn get_props(&self, _period: &dyn IPeriod) -> PropsHealth {
+impl IProviderHealthFactory for ProviderHealthFactory {
+    fn get_props(&self, _period: &dyn IPeriod) -> BoxHealthProps {
         let option_provider = self.get_provider(_period, &self.default_provider);
         match option_provider {
             Some(provider) => provider.get_props(_period),
-            None => self.empty_period_props,
+            None => Box::new(self.empty_period_props),
         }
     }
 }
@@ -292,12 +310,12 @@ impl ProviderSocialFactory {
     }
 }
 
-impl IProviderFactory<PropsSocial> for ProviderSocialFactory {
-    fn get_props(&self, _period: &dyn IPeriod) -> PropsSocial {
+impl IProviderSocialFactory for ProviderSocialFactory {
+    fn get_props(&self, _period: &dyn IPeriod) -> BoxSocialProps {
         let option_provider = self.get_provider(_period, &self.default_provider);
         match option_provider {
             Some(provider) => provider.get_props(_period),
-            None => self.empty_period_props,
+            None => Box::new(self.empty_period_props),
         }
     }
 }
@@ -329,12 +347,12 @@ impl ProviderTaxingFactory {
     }
 }
 
-impl IProviderFactory<PropsTaxing> for ProviderTaxingFactory {
-    fn get_props(&self, _period: &dyn IPeriod) -> PropsTaxing {
+impl IProviderTaxingFactory for ProviderTaxingFactory {
+    fn get_props(&self, _period: &dyn IPeriod) -> BoxTaxingProps {
         let option_provider = self.get_provider(_period, &self.default_provider);
         match option_provider {
             Some(provider) => provider.get_props(_period),
-            None => self.empty_period_props,
+            None => Box::new(self.empty_period_props),
         }
     }
 }

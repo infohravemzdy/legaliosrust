@@ -7,13 +7,13 @@ mod service_tests {
         test_examples_report,
         taxing_07,
         "04_Taxing_07_AllowanceChild2nd",
-        |x: &dyn IPropsTaxing| { x.allowance_child2nd() },
+        |x: &BoxTaxingProps| { x.allowance_child2nd() },
         2010,
         2022
     );
 
     #[macro_use(crate::test_examples_log_int_taxing)]
-    crate::test_examples_log_int_taxing! (test_log_examples_2010_2022, "04_Taxing_07_AllowanceChild2nd", |x: &dyn IPropsTaxing| {x.allowance_child2nd()},
+    crate::test_examples_log_int_taxing! (test_log_examples_2010_2022, "04_Taxing_07_AllowanceChild2nd", |x: &BoxTaxingProps| {x.allowance_child2nd()},
         test_examples_2010: 2010,
         [
             allowance_child2nd_test_period_2010_01: 2010, 1, 2010, 1, 967,
